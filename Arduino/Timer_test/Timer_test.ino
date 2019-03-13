@@ -1,5 +1,5 @@
-//Woon Jun Shen
-//UM402 (433 MHz UART)
+//Author Dinh Trung Nghia
+//LoRa SX1278 (433 MHz UART)
 #include <SoftwareSerial.h>
 #include <TimerOne.h>
 
