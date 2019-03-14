@@ -1,4 +1,5 @@
 //Author: Dinh Trung Nghia
+//LoRa SX 1278 433MHz - Address: 125 - Channel 25 - Transparent mode
 //TivaC Centre Node
 String inputString2 = ""; 
 boolean stringComplete2 = false; // State Machine
