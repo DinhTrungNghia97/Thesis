@@ -10,6 +10,10 @@ void setup() {
   Serial2.begin(19200);
   // declare 200 bytes for inputString2:
   inputString2.reserve(200);
+  pinMode(6,OUTPUT);  //M0
+  pinMode(5,OUTPUT);  //M1
+  digitalWrite(6,LOW);
+  digitalWrite(5,LOW);
   Serial.println("Tiva C Centre Node Start");
   delay(200);
 }
@@ -19,6 +23,11 @@ void loop() {
   if (stringComplete2) {
     Serial.println(inputString2); 
   // Empty string
+    Serial2.write(0x01);
+    Serial2.write(0x26);
+    Serial2.write(0x1A);
+    Serial2.print(inputString2);
+    Serial2.println("Already Send!");
     inputString2 = "";
     stringComplete2 = false;
   }
