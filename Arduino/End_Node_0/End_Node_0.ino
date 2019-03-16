@@ -39,7 +39,7 @@ void loop() {
       mySerial.write(0x01);
       mySerial.write(0x25);
       mySerial.write(0x19);
-      mySerial.print("Failed to read from DHT sensor!\n");
+      mySerial.print("Sensor node 1: Failed to read from DHT sensor!\n");
       delay(500);
       senddata = false;
       Timer1.resume();
@@ -48,7 +48,7 @@ void loop() {
     mySerial.write(0x01);
     mySerial.write(0x25);
     mySerial.write(0x19);
-    mySerial.print("Temparature and Humidity node 0: " + String(t) + " " + String(h) + "\n");
+    mySerial.print("Data0," + String(t) + "," + String(h) + "\n");
     Serial.println(t);     //Test on Serial sender
     Serial.println(h);    //Test on Serial Sender
     delay(500);

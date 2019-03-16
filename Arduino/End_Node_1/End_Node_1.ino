@@ -21,7 +21,7 @@ void setup() {
   digitalWrite(4,LOW);
   digitalWrite(5,LOW);
   dht.begin();
-  Timer1.initialize(25000000);   //2.5s interrupt
+  Timer1.initialize(2500000);   //2.5s interrupt
   Timer1.attachInterrupt(timerISR); //Interrupt function
 }
 
@@ -35,14 +35,16 @@ void loop() {
     float h = dht.readHumidity();
     float t = dht.readTemperature();
     if (isnan(h) || isnan(t)) {
-    Serial.println("Failed to read from DHT sensor!");
+    Serial.println("Sensor node 2: Failed to read from DHT sensor!");
+    delay(500);
+    senddata = false;
     Timer1.resume();
     return;
   }
     mySerial.write(0x01);
     mySerial.write(0x25);
     mySerial.write(0x19);
-    mySerial.print("Temparature and Humidity node 1: " + String(t) + " " + String(h) + "\n");
+    mySerial.print("Data1," + String(t) + "," + String(h) + "\n");
     Serial.println(t);     //Test on Serial sender
     Serial.println(h);    //Test on Serial Sender
     delay(500);
