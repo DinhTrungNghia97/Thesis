@@ -11,7 +11,7 @@ void WakeUp();
 void setup()
 {
   Serial.begin(19200);
-  Serial1.begin(19200);
+  Serial1.begin(115200);
   Serial2.begin(19200);
   inputString2.reserve(200);
   pinMode(RED_LED, OUTPUT);                  // Make red LED an output
@@ -37,13 +37,25 @@ void loop()
        Serial2.write(0x01);
        Serial2.write(0x25);
        Serial2.write(0x19);
-       Serial2.println("Gateway receive!");
+       Serial2.println("Stop Sending!");
        while(digitalRead(AUX) == 0) {}
        Serial1.print(inputString2);
        Serial1.flush();
+       inputString2 = "";
+       stringComplete2 = false;
+       //gotosuspend = true;
+    }  
+    else if(inputString2.indexOf("Suspend!") != -1) {
+       Serial2.write(0x01);
+       Serial2.write(0x25);
+       Serial2.write(0x19);
+       Serial2.println("Suspend!");
+       Serial2.flush();
+       inputString2 = "";
+       stringComplete2 = false;
        gotosuspend = true;
-    }   
-  // Empty string
+    } 
+    // Empty string
     inputString2 = "";
     stringComplete2 = false;
   }   
@@ -61,6 +73,20 @@ void serialEvent2() {  //Uart Interrupt
       } 
    }
 } 
+
+void serialEvent1() {  //Uart Interrupt
+    while (Serial1.available()) {
+      // Get new byte
+      char inChar2 = (char)Serial1.read(); 
+      // Add this byte to String
+      inputString2 += inChar2;
+      // Set flag
+      if (inChar2 == '\n') {
+        stringComplete2 = true;
+      } 
+   }
+} 
+
 void Going_To_Sleep() {
   attachInterrupt(digitalPinToInterrupt(AUX), WakeUp, LOW);// Attach ISR to PUSH1
   digitalWrite(RED_LED, LOW);

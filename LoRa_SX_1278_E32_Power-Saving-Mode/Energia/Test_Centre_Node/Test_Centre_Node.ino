@@ -70,13 +70,18 @@ void loop()
       data1 = inputString2;
       b = 1;
     }
-    else if(inputString2.indexOf("Gateway") != -1) {
+    else if(inputString2.indexOf("Stop") != -1) {
       MAP_TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
       MAP_TimerIntDisable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
       MAP_TimerDisable(TIMER1_BASE, TIMER_A);
+      Serial.println("Waiting to suspend!");
+      Serial.flush();
+    }
+    else if(inputString2.indexOf("Suspend!") != -1) {
       GoToSuspend = true;
       d = 1;
     }
+    
     inputString2 = "";
     stringComplete2 = false;
   }

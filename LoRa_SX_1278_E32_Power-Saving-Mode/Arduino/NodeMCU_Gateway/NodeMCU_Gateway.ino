@@ -74,10 +74,10 @@ void loop() {
       Serial.println(Temp2);
       Serial.println(Humi2);
       */
-      Temp1 = inputString.substring(T1+1, H1);
-      Humi1 = inputString.substring(H1+1, S - 1);
-      Temp2 = inputString.substring(T2+1, H2);
-      Humi2 = inputString.substring(H2+1, stringlength - 2);
+      Temp1 = inputString.substring(T1+1, H1) + "%";
+      Humi1 = inputString.substring(H1+1, S - 1) + "%";
+      Temp2 = inputString.substring(T2+1, H2) + "%";
+      Humi2 = inputString.substring(H2+1, stringlength - 2) + "%";
 
       //Set value
       Firebase.setString("Temparature 0", Temp1);
