@@ -1,0 +1,88 @@
+/* CSS files add styling rules to your content */
+/*
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.humid_node_0{
+    height: 80px;
+    border:1px solid red;
+}
+.humid_node_0 span{
+    margin:0;
+    padding:0;
+    border: solid 1px black;
+    margin-left: 20px;
+    font-size: 36px;
+    display: inline;
+    line-height: 80px;
+}
+.humid_node_0 .web_address{
+    font-size:26px;
+}
+
+.humid_node_1{
+    height: 80px;
+    border:1px solid red;
+}
+.humid_node_1 span{
+    margin:0;
+    padding:0;
+    border: solid 1px black;
+    margin-left: 20px;
+    font-size: 36px;
+    display: inline;
+    line-height: 80px;
+}
+.humid_node_1 .web_address{
+    font-size:26px;
+}
+
+.temp_node_0{
+    height: 80px;
+    border:1px solid red;
+}
+.temp_node_0 span{
+    margin:0;
+    padding:0;
+    border: solid 1px black;
+    margin-left: 20px;
+    font-size: 36px;
+    display: inline;
+    line-height: 80px;
+}
+.temp_node_0 .web_address{
+    font-size:26px;
+}
+
+.temp_node_1{
+    height: 80px;
+    border:1px solid red;
+}
+.temp_node_1 span{
+    margin:0;
+    padding:0;
+    border: solid 1px black;
+    margin-left: 20px;
+    font-size: 36px;
+    display: inline;
+    line-height: 80px;
+}
+.temp_node_1 .web_address{
+    font-size:26px;
+}
+*/
+
+.demo-list-icon {
+  width: 300px;
+}
+
+.demo-list-three {
+  width: 650px;
+}
