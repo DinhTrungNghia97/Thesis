@@ -119,7 +119,7 @@
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
-          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
 			<div class="mdl-cell--5-offset mdl-color--white mdl-cell mdl-cell--12-col mdl-grid width=">
 				<h3 class="title" align="center"><b>Current Value</b></h3>
 			</div>
@@ -135,6 +135,13 @@
 			<div class="container">
 				<div id="g4" class="gauge"></div>
 			</div>
+			<div class="container">
+				<div id="g5" class="gauge"></div>
+			</div>
+			<div class="container">
+				<div id="g6" class="gauge"></div>
+			</div>
+
 			<!--
             <svg fill="currentColor" width="200px" height="260px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
               <text font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.01" x="0.495" y="0.95">Temparature 0</text>
@@ -267,19 +274,19 @@
       </svg>
       <a href="https://github.com/DinhTrungNghia97/Thesis" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>
 	
-	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
 	
+	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
 	<script>
-	// Initialize Firebase
-	var config = {
+		// Initialize Firebase
+		var config = {
 		apiKey: "AIzaSyCOgSccKVaeiII58CtLexokfn0lKwgeOUE",
 		authDomain: "thesis-lora-sx-1278-e32.firebaseapp.com",
 		databaseURL: "https://thesis-lora-sx-1278-e32.firebaseio.com",
 		projectId: "thesis-lora-sx-1278-e32",
 		storageBucket: "thesis-lora-sx-1278-e32.appspot.com",
 		messagingSenderId: "163358699031"
-	};
-	firebase.initializeApp(config);
+		};
+		firebase.initializeApp(config);
 	</script>
 	
 	<script src="app.js"></script>
