@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+	<link rel="stylesheet" type="text/css" href="highcharts.css">
     <link rel="stylesheet" href="styles.css">
     <style>
     #view-source {
@@ -141,6 +142,8 @@
 			<div class="container">
 				<div id="g6" class="gauge"></div>
 			</div>
+			
+			
 
 			<!--
             <svg fill="currentColor" width="200px" height="260px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
@@ -179,10 +182,12 @@
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
 			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Temparature+Node+0&type=line&xaxis=Time&yaxis=Value+%28%C2%B0C%29"></iframe>
 			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Temparature+Node+1&type=line&xaxis=Time&yaxis=Value+%28%C2%B0C%29"></iframe>
+			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Temparature+Node+2&type=line&xaxis=Time&yaxis=Value+%28%C2%B0C%29"></iframe>
 		  </div>
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
 			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Humidity+Node+0&type=line&xaxis=Time&yaxis=Value+%28%25%29"></iframe>
 			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Humidity+Node+1&type=line&xaxis=Time&yaxis=Value+%28%25%29"></iframe>
+			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Humidity+Node+2&type=line&xaxis=Time&yaxis=Value+%28%25%29"></iframe>
 		  </div>
             <div class="demo-separator mdl-cell--1-col"></div>
             <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
@@ -222,8 +227,12 @@
               </div>
             </div>
           </div>
-        </div>
-      </main>
+
+			<div id="g7" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			<div>
+			<text id="temp0" font-family="Roboto" font-size="0.22" fill="#888" text-anchor="middle"></text>
+			</div>
+	  </main>
     </div>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
         <defs>
@@ -272,6 +281,7 @@
           </g>
         </defs>
       </svg>
+	  
       <a href="https://github.com/DinhTrungNghia97/Thesis" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>
 	
 	
@@ -288,8 +298,11 @@
 		};
 		firebase.initializeApp(config);
 	</script>
-	
+	<script src="highcharts.js"></script>
+	<script src="exporting.js"></script>
 	<script src="app.js"></script>
+	<!-- <script src="https://code.highcharts.com/modules/data.js"></script> -->
+
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>
