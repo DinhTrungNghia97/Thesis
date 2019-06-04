@@ -4,8 +4,7 @@ var humid1 = document.getElementById("humid1");
 var temp0 = document.getElementById("temp0");
 var temp1 = document.getElementById("temp1");
 */
-var globalChartData = null;
-var globalChartData1 = null;
+
 
 var g1 = new JustGage({
 		id: 'g1',
@@ -188,64 +187,69 @@ var g6 = new JustGage({
 			}],
 		counter: true
 		});
+		
+var Update = firebase.database().ref().child("Count");
+Update.on('value', function(snapshot){
+UpdateData();
+}); 
 	  
-var read_humid_0 = firebase.database().ref().child("Humidity 0");  
-read_humid_0.on('value', function(snapshot){
-//humid0.innerHTML = snapshot.val();
-globalChartData = parseFloat(snapshot.val());
-g4.refresh(snapshot.val());
-});
+function UpdateData() {
+	var Time = (new Date()).getTime();
 	
-var read_humid_1 = firebase.database().ref().child("Humidity 1");  
-read_humid_1.on('value', function(snapshot){
-//humid1.innerHTML = snapshot.val();
-g5.refresh(snapshot.val());
-});
+	var read_humid_0 = firebase.database().ref().child("Humidity 0");
+	read_humid_0.once('value', function(snapshot){
+	var globalChartData = parseFloat(snapshot.val());
+	var DataPoint = { x: Time, y: globalChartData };
+	chart0.series[0].addPoint(DataPoint, true);
+	g4.refresh(snapshot.val());
+	});
+		
+	var read_humid_1 = firebase.database().ref().child("Humidity 1");  
+	read_humid_1.once('value', function(snapshot){
+	var globalChartData = parseFloat(snapshot.val());
+	var DataPoint = { x: Time, y: globalChartData };
+	chart1.series[0].addPoint(DataPoint, true);
+	g5.refresh(snapshot.val());
+	});
 
-var read_humid_2 = firebase.database().ref().child("Humidity 2");  
-read_humid_2.on('value', function(snapshot){
-//humid1.innerHTML = snapshot.val();
-g6.refresh(snapshot.val());
-});
+	var read_humid_2 = firebase.database().ref().child("Humidity 2");  
+	read_humid_2.once('value', function(snapshot){
+	var globalChartData = parseFloat(snapshot.val());
+	var DataPoint = { x: Time, y: globalChartData };
+	chart2.series[0].addPoint(DataPoint, true);
+	g6.refresh(snapshot.val());
+	});
 	
-var read_temp_0 = firebase.database().ref().child("Temparature 0");  
-read_temp_0.on('value', function(snapshot){
-globalChartData1 = parseFloat(snapshot.val());
-g1.refresh(snapshot.val());
-});
+	var read_temp_0 = firebase.database().ref().child("Temparature 0");  
+	read_temp_0.once('value', function(snapshot){
+	var globalChartData = parseFloat(snapshot.val());
+	var DataPoint = { x: Time, y: globalChartData };
+	chart0.series[1].addPoint(DataPoint, true);
+	g1.refresh(snapshot.val());
+	});
 	
-var read_temp_1 = firebase.database().ref().child("Temparature 1");  
-read_temp_1.on('value', function(snapshot){
-//temp1.innerHTML = snapshot.val();
-g2.refresh(snapshot.val());
-});
+	var read_temp_1 = firebase.database().ref().child("Temparature 1");  
+	read_temp_1.once('value', function(snapshot){
+	var globalChartData = parseFloat(snapshot.val());
+	var DataPoint = { x: Time, y: globalChartData };
+	chart1.series[1].addPoint(DataPoint, true);
+	g2.refresh(snapshot.val());
+	});
 
-var read_temp_2 = firebase.database().ref().child("Temparature 2");  
-read_temp_2.on('value', function(snapshot){
-//temp1.innerHTML = snapshot.val();
-g3.refresh(snapshot.val());
-});
-
-var chart;
+	var read_temp_2 = firebase.database().ref().child("Temparature 2");  
+	read_temp_2.once('value', function(snapshot){
+	var globalChartData = parseFloat(snapshot.val());
+	var DataPoint = { x: Time, y: globalChartData };
+	chart2.series[1].addPoint(DataPoint, true);
+	g3.refresh(snapshot.val());
+	});
+}
+	
+var chart0;
         document.addEventListener('DOMContentLoaded', function() {
-            chart = Highcharts.chart('g7', {
+            chart0 = Highcharts.chart('g7', {
                 chart: {
                     type: 'spline',
-					events: {
-						load: function () {
-							// set up the updating of the chart each second
-							var series = this.series[0];
-							var series1 = this.series[1];
-							setInterval(function () {
-								var x = (new Date()).getTime(), // current time
-									y = globalChartData,
-									m = x, // current time
-									n = globalChartData1;
-									series.addPoint([x, y], true, true);
-									series1.addPoint([m, n], true, true);
-							}, 1000);
-						}
-					}
                 },
 				time: {
 					useUTC: false
@@ -279,45 +283,102 @@ var chart;
 
 				series: [{
 					name: 'Humidity 0',
-					data: (function () {
-								// generate an array of random data
-								var data = [],
-									time = (new Date()).getTime(),
-									i;
-
-								for (i = -19; i <= 0; i += 1) {
-									data.push({
-									x: time + i * 1000,
-									y: globalChartData
-									});
-								}
-								return data;
-							}())
+					data: []
 				},{
 					name: 'Temparature 0',
-					data: (function () {
-								// generate an array of random data
-								var data1 = [],
-									time1 = (new Date()).getTime(),
-									k;
-
-								for (k = -19; k <= 0; k += 1) {
-									data1.push({
-									m: time1 + k * 1000,
-									n: globalChartData1
-									});
-								}
-								return data1;
-							}())
+					data: []
 				}]
             });
-        });	
+        });
 
+var chart1;
+        document.addEventListener('DOMContentLoaded', function() {
+            chart1 = Highcharts.chart('g8', {
+                chart: {
+                    type: 'spline',
+                },
+				time: {
+					useUTC: false
+				},
+                title: {
+                    text: 'Live Measurement Data Collection'
+                },
+				tooltip: {
+					headerFormat: '<b>{series.name}</b><br/>',
+					pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+				},
+				legend: {
+					enabled: true,
+				},
+				exporting: {
+					enabled: false
+				},
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150,
+                    maxZoom: 20 * 1000
+                },
+                yAxis: {
+                    minPadding: 0.2,
+                    maxPadding: 0.2,
+                    title: {
+                        text: 'Value',
+                        margin: 80
+                    }
+                },
 
-function getDataCharts(){
-	var read_humid_0 = firebase.database().ref().child("Humidity 0");
-	read_humid_0.on('value', function(snapshot){
-	//humid0.innerHTML = snapshot.val();
-	globalChartData = parseFloat(snapshot.val());
-	return globalChartData;
-});}
+				series: [{
+					name: 'Humidity 1',
+					data: []
+				},{
+					name: 'Temparature 1',
+					data: []
+				}]
+            });
+        });
+
+var chart2;
+        document.addEventListener('DOMContentLoaded', function() {
+            chart2 = Highcharts.chart('g9', {
+                chart: {
+                    type: 'spline',
+                },
+				time: {
+					useUTC: false
+				},
+                title: {
+                    text: 'Live Measurement Data Collection'
+                },
+				tooltip: {
+					headerFormat: '<b>{series.name}</b><br/>',
+					pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+				},
+				legend: {
+					enabled: true,
+				},
+				exporting: {
+					enabled: false
+				},
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150,
+                    maxZoom: 20 * 1000
+                },
+                yAxis: {
+                    minPadding: 0.2,
+                    maxPadding: 0.2,
+                    title: {
+                        text: 'Value',
+                        margin: 80
+                    }
+                },
+
+				series: [{
+					name: 'Humidity 2',
+					data: []
+				},{
+					name: 'Temparature 2',
+					data: []
+				}]
+            });
+        });		
