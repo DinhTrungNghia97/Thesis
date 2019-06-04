@@ -14,8 +14,8 @@ String Humi1,Temp1,Temp2,Humi2;
 int T1, H1, T2, H2, S; 
 
 void setup() {
-  Serial.begin(19200);
-  mySerial.begin(19200);
+  Serial.begin(115200);
+  mySerial.begin(115200);
   Serial.println("NodeMcu Gateway Start");
   //Connect to wifi
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -81,9 +81,13 @@ void loop() {
 
       //Set value
       Firebase.setString("Temparature 0", Temp1);
+      Firebase.setString("Temparature 0", Temp1);
       Firebase.setString("Humidity 0", Humi1);
       Firebase.setString("Temparature 1", Temp2);
       Firebase.setString("Humidity 1", Humi2);
+      delay(100);
+      mySerial.println("Suspend!");
+      delay(100);
       /*//Handle error
       if (Firebase.failed()) {
         Serial.print("setting string failed:");

@@ -33,8 +33,8 @@ void setup()
   digitalWrite(RED_LED, HIGH);
   
   //Initiate serial
-  Serial.begin(19200);
-  Serial2.begin(19200);
+  Serial.begin(115200);
+  Serial2.begin(115200);
   Serial.println("Tiva C Centre Node Start!");
   Serial.flush();
 

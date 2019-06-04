@@ -2,22 +2,41 @@
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
 
+//Firebase key
 #define FIREBASE_HOST "thesis-lora-sx-1278-e32.firebaseio.com"
 #define FIREBASE_AUTH "OqmEwG3C006aXWcBP0z5Z9Iy6GvCvwUQl5GN2gNi"
-#define WIFI_SSID "Naruto"
-#define WIFI_PASSWORD "Ledinh96"
+
+//WiFi ID & Password
+#define WIFI_SSID "Danny"
+#define WIFI_PASSWORD "181o1997"
+
+
+//Thingspeak key
+String apiKey = "ZYI5ACIQ39N39S1W";
+const char* server = "api.thingspeak.com";
 
 SoftwareSerial mySerial(D1, D2);
 String inputString = "";
 boolean stringComplete = false;
-String Humi1,Temp1,Temp2,Humi2;
-int T1, H1, T2, H2, S; 
-
+String Humi1,Temp1,Temp2,Humi2,Temp3,Humi3 ;
+int T1, H1, T2, H2, T3, H3, S; 
+static int a = 0;
+static int b = 0;
+WiFiClient client;
 void setup() {
-  Serial.begin(19200);
-  mySerial.begin(19200);
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+  mySerial.begin(115200);
+  WiFi.mode(WIFI_STA);
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(D5, OUTPUT); //M1
+  pinMode(D6, OUTPUT); //M0
+  pinMode(D7, INPUT); //test
+  Serial.print(digitalRead(D7));
+  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(D5, LOW);
+  digitalWrite(D6, LOW);
   Serial.println("NodeMcu Gateway Start");
-  //Connect to wifi
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
   while (WiFi.status() != WL_CONNECTED) {
@@ -29,15 +48,25 @@ void setup() {
   Serial.println(WiFi.localIP());
   //Start firebase
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  digitalWrite(LED_BUILTIN, HIGH);
 }
 
 void loop() {
   if (stringComplete) {
+    digitalWrite(LED_BUILTIN, LOW);
     int i = 0;
+    int m = 0;
     int stringlength = inputString.length();
-    Serial.print("String length = "); Serial.println(stringlength);
-    Serial.print(inputString);
-    if(inputString.indexOf("Data0") != -1) {
+
+    if((inputString.indexOf("Data0") != -1) && (a == 0)) {
+       a = 1;
+       Serial.print("String length = "); Serial.println(stringlength);
+       Serial.print(inputString);
+       mySerial.write(0x01);
+       mySerial.write(0x25);
+       mySerial.write(0x18);
+       mySerial.println("Stop Sending!");
+       delay(100);
       for (; i < stringlength; i++) {
         if (inputString.charAt(i) == ',') {
           T1 = i; i++;
@@ -64,42 +93,128 @@ void loop() {
           }
         }
       }
-      /* test serial
-      Serial.print("T1 = "); Serial.println(T1);
-      Serial.print("H1 = "); Serial.println(H1);
-      Serial.print("T2 = "); Serial.println(T2);
-      Serial.print("H2 = "); Serial.println(H2);
-      Serial.println(Temp1);
-      Serial.println(Humi1);
-      Serial.println(Temp2);
-      Serial.println(Humi2);
-      */
       Temp1 = inputString.substring(T1+1, H1);
       Humi1 = inputString.substring(H1+1, S - 1);
       Temp2 = inputString.substring(T2+1, H2);
       Humi2 = inputString.substring(H2+1, stringlength - 2);
-
+      Serial.println(Temp1 + " " + Humi1 + " " + Temp2 + " " + Humi2);
+      
       //Set value
+      delay(50);
       Firebase.setString("Temparature 0", Temp1);
+      delay(50);
       Firebase.setString("Humidity 0", Humi1);
+      delay(50);
       Firebase.setString("Temparature 1", Temp2);
+      delay(50);
       Firebase.setString("Humidity 1", Humi2);
-      /*//Handle error
-      if (Firebase.failed()) {
-        Serial.print("setting string failed:");
-        Serial.println(Firebase.error());  
-      }*/
+      delay(50);
+   
+/*
+      if (client.connect(server, 80)) {
+    String body = "&field1=" + Temp1 + "&field2=" + Humi1 + "&field3=" + Temp2 + "&field4=" + Humi2;
+
+    client.print("POST /update HTTP/1.1\n");
+    client.print("Host: api.thingspeak.com\n");
+    client.print("Connection: close\n");
+    client.print("X-THINGSPEAKAPIKEY: " + apiKey + "\n");
+    client.print("Content-Type: application/x-www-form-urlencoded\n");
+    client.print("Content-Length: ");
+    client.print(body.length());
+    client.print("\n\n");
+    client.print(body);
+    client.print("\n\n");
+
+      }
+      */
+     }
+
+     else if((inputString.indexOf("Data2") != -1) && (b == 0)) {
+      b = 1;
+       Serial.print("String length = "); Serial.println(stringlength);
+       Serial.print(inputString);
+       mySerial.write(0x01);
+       mySerial.write(0x26);
+       mySerial.write(0x18);
+       mySerial.println("Stop Sending!");
+       delay(100);
+       for (; m < stringlength; m++) {
+        if (inputString.charAt(m) == ',') {
+          T3 = m; m++;
+          for (; m < stringlength; m++) {
+            if (inputString.charAt(m) == ',') {
+              H3 = m; m = stringlength;
+            }
+          }
+        }
+       }
+      Temp3 = inputString.substring(T3+1, H3);
+      Humi3 = inputString.substring(H3+1, stringlength - 2);
+      Serial.println(Temp3 + " " + Humi3);
+
+      delay(50);
+      Firebase.setString("Temparature 2", Temp3);
+      delay(50);
+      Firebase.setString("Humidity 2", Humi3);
+      delay(50);
+/*
+      if (client.connect(server, 80)) {
+        String body = "&field5=" + Temp3 + "&field6=" + Humi3 ;
+        client.print("POST /update HTTP/1.1\n");
+        client.print("Host: api.thingspeak.com\n");
+        client.print("Connection: close\n");
+        client.print("X-THINGSPEAKAPIKEY: " + apiKey + "\n");
+        client.print("Content-Type: application/x-www-form-urlencoded\n");
+        client.print("Content-Length: ");
+        client.print(body.length());
+        client.print("\n\n");
+        client.print(body);
+        client.print("\n\n");
+      }
+      */
+     }
+ 
+      inputString = "";
+      stringComplete = false;
+      //Serial.println("Deep Sleep!");
+      //ESP.deepSleep(0);
     }
-   inputString = "";
-   stringComplete = false;
-   Serial.println("Deep Sleep!");
-   ESP.deepSleep(0); 
-   }
-  while (mySerial.available()) {
-    char inChar = (char)mySerial.read();
-    inputString += inChar;
-    if (inChar == '\n') {
-      stringComplete = true;
+    if ((a==1) && (b ==1))
+    {
+    //WiFiClient client;
+    if (client.connect(server, 80)) {
+    String body = "&field1=" + Temp1 + "&field2=" + Humi1 + "&field3=" + Temp2 + "&field4=" + Humi2 + "&field5=" + Temp3 + "&field6=" + Humi3;
+    client.print("POST /update HTTP/1.1\n");
+    client.print("Host: api.thingspeak.com\n");
+    client.print("Connection: close\n");
+    client.print("X-THINGSPEAKAPIKEY: " + apiKey + "\n");
+    client.print("Content-Type: application/x-www-form-urlencoded\n");
+    client.print("Content-Length: ");
+    client.print(body.length());
+    client.print("\n\n");
+    client.print(body);
+    client.print("\n\n");
+      }
+      //client.stop();
+      mySerial.write(0x01);
+      mySerial.write(0x25);
+      mySerial.write(0x18);
+      mySerial.println("Suspend!");
+      delay(100);
+      mySerial.write(0x01);
+      mySerial.write(0x26);
+      mySerial.write(0x18);
+      mySerial.println("Suspend!");
+      delay(100);
+      digitalWrite(LED_BUILTIN, HIGH);
+      a=0;
+      b=0;
     }
-  }
+      while (mySerial.available()) {
+        char inChar = (char)mySerial.read();
+        inputString += inChar;
+        if (inChar == '\n') {
+        stringComplete = true;
+      }
+     }
 }
