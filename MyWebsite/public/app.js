@@ -4,8 +4,7 @@ var humid1 = document.getElementById("humid1");
 var temp0 = document.getElementById("temp0");
 var temp1 = document.getElementById("temp1");
 */
-var globalChartData = null;
-var globalChartData1 = null;
+
 
 var g1 = new JustGage({
 		id: 'g1',
@@ -192,7 +191,10 @@ var g6 = new JustGage({
 var read_humid_0 = firebase.database().ref().child("Humidity 0");  
 read_humid_0.on('value', function(snapshot){
 //humid0.innerHTML = snapshot.val();
-globalChartData = parseFloat(snapshot.val());
+var globalChartData = parseFloat(snapshot.val());
+var Time = (new Date()).getTime();
+var DataPoint = { x: Time, y: globalChartData };
+chart0.series[0].addPoint(DataPoint, true);
 g4.refresh(snapshot.val());
 });
 	
@@ -210,7 +212,10 @@ g6.refresh(snapshot.val());
 	
 var read_temp_0 = firebase.database().ref().child("Temparature 0");  
 read_temp_0.on('value', function(snapshot){
-globalChartData1 = parseFloat(snapshot.val());
+var globalChartData = parseFloat(snapshot.val());
+var Time = (new Date()).getTime();
+var DataPoint = { x: Time, y: globalChartData };
+chart0.series[1].addPoint(DataPoint, true);
 g1.refresh(snapshot.val());
 });
 	
@@ -226,26 +231,11 @@ read_temp_2.on('value', function(snapshot){
 g3.refresh(snapshot.val());
 });
 
-var chart;
+var chart0;
         document.addEventListener('DOMContentLoaded', function() {
-            chart = Highcharts.chart('g7', {
+            chart0 = Highcharts.chart('g7', {
                 chart: {
                     type: 'spline',
-					events: {
-						load: function () {
-							// set up the updating of the chart each second
-							var series = this.series[0];
-							var series1 = this.series[1];
-							setInterval(function () {
-								var x = (new Date()).getTime(), // current time
-									y = globalChartData,
-									m = x, // current time
-									n = globalChartData1;
-									series.addPoint([x, y], true, true);
-									series1.addPoint([m, n], true, true);
-							}, 1000);
-						}
-					}
                 },
 				time: {
 					useUTC: false
@@ -279,36 +269,10 @@ var chart;
 
 				series: [{
 					name: 'Humidity 0',
-					data: (function () {
-								// generate an array of random data
-								var data = [],
-									time = (new Date()).getTime(),
-									i;
-
-								for (i = -19; i <= 0; i += 1) {
-									data.push({
-									x: time + i * 1000,
-									y: globalChartData
-									});
-								}
-								return data;
-							}())
+					data: []
 				},{
 					name: 'Temparature 0',
-					data: (function () {
-								// generate an array of random data
-								var data1 = [],
-									time1 = (new Date()).getTime(),
-									k;
-
-								for (k = -19; k <= 0; k += 1) {
-									data1.push({
-									m: time1 + k * 1000,
-									n: globalChartData1
-									});
-								}
-								return data1;
-							}())
+					data: []
 				}]
             });
         });	
