@@ -282,10 +282,10 @@ var chart0;
                 },
 
 				series: [{
-					name: 'Humidity 0',
+					name: 'Humidity 0 (%)',
 					data: []
 				},{
-					name: 'Temparature 0',
+					name: 'Temparature 0 (°C)',
 					data: []
 				}]
             });
@@ -328,10 +328,10 @@ var chart1;
                 },
 
 				series: [{
-					name: 'Humidity 1',
+					name: 'Humidity 1 (%)',
 					data: []
 				},{
-					name: 'Temparature 1',
+					name: 'Temparature 1 (°C)',
 					data: []
 				}]
             });
@@ -374,10 +374,10 @@ var chart2;
                 },
 
 				series: [{
-					name: 'Humidity 2',
+					name: 'Humidity 2 (%)',
 					data: []
 				},{
-					name: 'Temparature 2',
+					name: 'Temparature 2 (°C)',
 					data: []
 				}]
             });

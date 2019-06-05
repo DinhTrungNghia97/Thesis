@@ -1,188 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>HOME</title>
+    <title>My Thesis</title>
+    <link rel="stylesheet" href="semantic.css">
+    <link rel="stylesheet" href="Login.css">
 
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+</head>
 
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+<body>
+    <!-- Login Form -->
+    <div class="loginform">
+        <h1>LOGIN</h1>
+        <div class="ui form">
+		
+            <div class="field">
+                <label>Username</label>
+                <input type="email" id="txt_username" placeholder="Email....">
+            </div>
+			
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="txt_password" placeholder="Password....">
+            </div>
 
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+            <button class="ui button" onclick="login()">Submit</button>      
+        </div>
+    </div>
 
-    <link rel="shortcut icon" href="images/favicon.png">
-    
-    <!-- import the webpage's stylesheet -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-	
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- import the webpage's javascript file -->	
+    <!-- particles.js container -->
 
-  </head>  
-  <body>
-	
-	<!-- Always shows a header, even in smaller screens. -->
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<header class="mdl-layout__header">
-			<div class="mdl-layout__header-row">
-			<!-- Title -->
-				<span class="mdl-layout-title">HOME PAGE</span>
-				<!-- Add spacer, to align navigation to the right -->
-				<div class="mdl-layout-spacer"></div>
-				<!-- Navigation. We hide it in small screens. -->
-				<nav class="mdl-navigation mdl-layout--large-screen-only">
-					<a class="mdl-navigation__link" href="data_monitor.html">Data Display</a>
-					<a class="mdl-navigation__link" href="">Link</a>
-					<a class="mdl-navigation__link" href="">Link</a>
-					<a class="mdl-navigation__link" href="">Link</a>
-				</nav>
-			</div>
-		</header>
-		<div class="mdl-layout__drawer">
-			<span class="mdl-layout-title">Title</span>
-			<nav class="mdl-navigation">
-				<a class="mdl-navigation__link" href="data_monitor.html">Data Display</a>
-				<a class="mdl-navigation__link" href="">Link</a>
-				<a class="mdl-navigation__link" href="">Link</a>
-				<a class="mdl-navigation__link" href="">Link</a>
-			</nav>
-		</div>
-		<main class="mdl-layout__content">
-			<div class="page-content">
-				<!-- Your content goes here -->
-				<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-					<div class="mdl-tabs__tab-bar">
-						<a href="#about-panel" class="mdl-tabs__tab is-active">About the project</a>
-						<a href="#members-panel" class="mdl-tabs__tab">Members</a>
-						<!--<a href="#albums-panel" class="mdl-tabs__tab">Discography</a> -->
-					</div>
-					
-					<div class="mdl-tabs__panel is-active" id="about-panel">
-						<p><b>The project</b>....</p>
-					</div>
-					
-					<div class="mdl-tabs__panel" id="members-panel">
-						<ul class="demo-list-three mdl-list">
-							<li class="mdl-list__item mdl-list__item--three-line">
-								<span class="mdl-list__item-primary-content">
-									<i class="material-icons mdl-list__item-avatar">person</i>
-									<span>PhS. Dang Ngoc Hanh</span>
-									<span class="mdl-list__item-text-body">
-										She is .....
-									</span>
-								</span>
-								<span class="mdl-list__item-secondary-content">
-									<span class="mdl-list__item-secondary-info">Tutor</span>
-									<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-								</span>
-							</li>
-							<li class="mdl-list__item mdl-list__item--three-line">
-								<span class="mdl-list__item-primary-content">
-									<i class="material-icons  mdl-list__item-avatar">person</i>
-									<span>Dinh Trung Nghia</span>
-									<span class="mdl-list__item-text-body">
-										He is.....
-									</span>
-								</span>
-								<span class="mdl-list__item-secondary-content">
-									<span class="mdl-list__item-secondary-info">Student</span>
-									<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-								</span>
-							</li>
-							<li class="mdl-list__item mdl-list__item--three-line">
-								<span class="mdl-list__item-primary-content">
-									<i class="material-icons  mdl-list__item-avatar">person</i>
-										<span>Vo Nguyen Song Huy</span>
-										<span class="mdl-list__item-text-body">
-											He is ....
-										</span>
-								</span>
-								<span class="mdl-list__item-secondary-content">
-									<span class="mdl-list__item-secondary-info">Student</span>
-									<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
-								</span>
-							</li>
-						</ul>
-					</div>
-					<!--<div class="mdl-tabs__panel" id="albums-panel">
-						<p>The Beatles' original UK LPs, in order of release:</p>
-						<ol>
-						<li>Please Please Me (1963)</li>
-						<li>With the Beatles (1963)</li>
-						<li>A Hard Day's Night (1964)</li>
-						<li>Beatles for Sale (1964)</li>
-						<li>Help! (1965)</li>
-						<li>Rubber Soul (1965)</li>
-						<li>Revolver (1966)</li>
-						<li>Sgt. Pepper's Lonely Hearts Club Band (1967)</li>
-						<li>The Beatles ("The White Album", 1968)</li>
-						<li>Yellow Submarine (1969)</li>
-						<li>Abbey Road (1969)</li>
-						<li>Let It Be (1970)</li>
-						</ol>
-					</div> <!-- -->
-				</div>
-				<!--
-				<h1 align="center">WELCOME TO MY PAGE</h1>
-				<!--<h1 id="humid0" align="left">Firebase Web App</h1>
-	
-				<div class="humid_node_0">
-					<span>Humidity 0:</span>
-					<span id="humid0"></span>
-				</div>
-	
-				<div class="temp_node_0">
-					<span>Temparature 0:</span>
-					<span id="temp0"></span>
-				</div>
-	
-				<div class="humid_node_1">
-					<span>Humidity 1:</span>
-					<span id="humid1"></span>
-				</div>
-	
-				<div class="temp_node_1">
-					<span>Temparature 1:</span>
-					<span id="temp1"></span>
-				</div>
-<!-- -->
-			</div>
-		</main>
-	</div>
-	
-	
-  
-	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-	
+	<script src="https://www.gstatic.com/firebasejs/6.1.0/firebase.js"></script>
+
 	<script>
-	// Initialize Firebase
-	var config = {
-		apiKey: "AIzaSyCOgSccKVaeiII58CtLexokfn0lKwgeOUE",
-		authDomain: "thesis-lora-sx-1278-e32.firebaseapp.com",
-		databaseURL: "https://thesis-lora-sx-1278-e32.firebaseio.com",
-		projectId: "thesis-lora-sx-1278-e32",
-		storageBucket: "thesis-lora-sx-1278-e32.appspot.com",
-		messagingSenderId: "163358699031"
-	};
-	firebase.initializeApp(config);
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCOgSccKVaeiII58CtLexokfn0lKwgeOUE",
+			authDomain: "thesis-lora-sx-1278-e32.firebaseapp.com",
+			databaseURL: "https://thesis-lora-sx-1278-e32.firebaseio.com",
+			projectId: "thesis-lora-sx-1278-e32",
+			storageBucket: "thesis-lora-sx-1278-e32.appspot.com",
+			messagingSenderId: "163358699031"
+		};
+		firebase.initializeApp(config);
 	</script>
 	
-	<!-- <script src="app.js"></script> -->
-	
-  
-  </body>
-</html>
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html> 

@@ -7,22 +7,23 @@
 #define FIREBASE_AUTH "OqmEwG3C006aXWcBP0z5Z9Iy6GvCvwUQl5GN2gNi"
 
 //WiFi ID & Password
-#define WIFI_SSID "Danny"
-#define WIFI_PASSWORD "181o1997"
+#define WIFI_SSID "Mangchua"
+#define WIFI_PASSWORD "0918086819"
 
 
 //Thingspeak key
-String apiKey = "ZYI5ACIQ39N39S1W";
-const char* server = "api.thingspeak.com";
+//String apiKey = "ZYI5ACIQ39N39S1W";
+//const char* server = "api.thingspeak.com";
 
 SoftwareSerial mySerial(D1, D2);
 String inputString = "";
 boolean stringComplete = false;
 String Humi1,Temp1,Temp2,Humi2,Temp3,Humi3 ;
-int T1, H1, T2, H2, T3, H3, S; 
+int T1, H1, T2, H2, T3, H3, S;
+static int Count=0; 
 static int a = 0;
 static int b = 0;
-WiFiClient client;
+//WiFiClient client;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
@@ -181,7 +182,7 @@ void loop() {
     }
     if ((a==1) && (b ==1))
     {
-    //WiFiClient client;
+    /*
     if (client.connect(server, 80)) {
     String body = "&field1=" + Temp1 + "&field2=" + Humi1 + "&field3=" + Temp2 + "&field4=" + Humi2 + "&field5=" + Temp3 + "&field6=" + Humi3;
     client.print("POST /update HTTP/1.1\n");
@@ -196,13 +197,25 @@ void loop() {
     client.print("\n\n");
       }
       //client.stop();
+      
       mySerial.write(0x01);
       mySerial.write(0x25);
       mySerial.write(0x18);
       mySerial.println("Suspend!");
       delay(100);
+      
       mySerial.write(0x01);
       mySerial.write(0x26);
+      mySerial.write(0x18);
+      mySerial.println("Suspend!");
+      delay(100);
+      */
+      delay(50);
+      Firebase.setFloat("Count", Count);
+      delay(50);
+      Count++;
+      mySerial.write(0xFF);
+      mySerial.write(0xFF);
       mySerial.write(0x18);
       mySerial.println("Suspend!");
       delay(100);
