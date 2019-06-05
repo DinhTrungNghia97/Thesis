@@ -17,7 +17,7 @@ function login() {
 	
 	if (InputUsername == globalUsername) {
 		if (InputPassword == globalPassword) {
-			window.location.href = "introduce.html";
+			window.location.replace("data_monitor.html");
 		}
 		else {
 			alert('Wrong Password');

@@ -17,6 +17,7 @@
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
+/*
 .demo-avatar {
   width: 48px;
   height: 48px;
@@ -32,6 +33,7 @@ html, body {
   border: none;
 }
 /* iOS Safari specific workaround */
+/*
 .demo-drawer .mdl-menu__container {
   z-index: -1;
 }
@@ -39,6 +41,7 @@ html, body {
   z-index: -2;
 }
 /* END iOS Safari specific workaround */
+/*
 .demo-drawer .mdl-menu .mdl-menu__item {
   display: -webkit-flex;
   display: -ms-flexbox;
