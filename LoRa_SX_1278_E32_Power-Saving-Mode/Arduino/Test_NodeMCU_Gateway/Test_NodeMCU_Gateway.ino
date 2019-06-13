@@ -1,14 +1,15 @@
 #include <SoftwareSerial.h>
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
+#include <Ticker.h>
 
 //Firebase key
 #define FIREBASE_HOST "thesis-lora-sx-1278-e32.firebaseio.com"
 #define FIREBASE_AUTH "OqmEwG3C006aXWcBP0z5Z9Iy6GvCvwUQl5GN2gNi"
 
 //WiFi ID & Password
-#define WIFI_SSID "Mangchua"
-#define WIFI_PASSWORD "0918086819"
+#define WIFI_SSID "Naruto"
+#define WIFI_PASSWORD "Ledinh96"
 
 
 //Thingspeak key
@@ -102,13 +103,13 @@ void loop() {
       
       //Set value
       delay(50);
-      Firebase.setString("Temparature 0", Temp1);
+      Firebase.setString("Temperature/0", Temp1);
       delay(50);
-      Firebase.setString("Humidity 0", Humi1);
+      Firebase.setString("Humidity/0", Humi1);
       delay(50);
-      Firebase.setString("Temparature 1", Temp2);
+      Firebase.setString("Temperature/1", Temp2);
       delay(50);
-      Firebase.setString("Humidity 1", Humi2);
+      Firebase.setString("Humidity/1", Humi2);
       delay(50);
    
 /*
@@ -154,9 +155,9 @@ void loop() {
       Serial.println(Temp3 + " " + Humi3);
 
       delay(50);
-      Firebase.setString("Temparature 2", Temp3);
+      Firebase.setString("Temperature/2", Temp3);
       delay(50);
-      Firebase.setString("Humidity 2", Humi3);
+      Firebase.setString("Humidity/2", Humi3);
       delay(50);
 /*
       if (client.connect(server, 80)) {
@@ -210,6 +211,38 @@ void loop() {
       mySerial.println("Suspend!");
       delay(100);
       */
+      if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
+        Firebase.setString("Alert", "0");
+        Serial.println("Good Connection");
+      }
+      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
+        Firebase.setString("Alert", "1");
+        Serial.println("All Abort");
+      }
+      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
+        Firebase.setString("Alert", "2");
+        Serial.println("Node 1 Abort");
+      }
+      else if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
+        Firebase.setString("Alert", "3");
+        Serial.println("Node 2 Abort");
+      }
+      else if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
+        Firebase.setString("Alert", "4");
+        Serial.println("Node 3 Abort");
+      }
+      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
+        Firebase.setString("Alert", "5");
+        Serial.println("Node 1&2 Abort");
+      }
+      else if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
+        Firebase.setString("Alert", "6");
+        Serial.println("Node 2&3 Abort");
+      }
+      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
+        Firebase.setString("Alert", "7");
+        Serial.println("Node 1&3 Abort");
+      }        
       delay(50);
       Firebase.setFloat("Count", Count);
       delay(50);
