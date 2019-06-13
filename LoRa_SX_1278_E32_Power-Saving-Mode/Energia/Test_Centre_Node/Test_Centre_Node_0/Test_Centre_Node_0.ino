@@ -16,13 +16,16 @@
 static volatile int a=0;
 static volatile int b=0;
 static volatile int c=0;
+static volatile int Count=0;
+static volatile int Count1=0;
 String data0, data1;
 String datasend = "";
 String inputString2 = ""; 
 boolean stringComplete2 = false; // State Machine
-boolean GoToSuspend = true;
+boolean GoToSuspend = false;
 void Timer0IntHandler();
 void Timer1IntHandler();
+void Timer2IntHandler();
 void serialEvent2();
 void setup()
 {
@@ -35,27 +38,33 @@ void setup()
   inputString2.reserve(200);
   pinMode(M0,OUTPUT);  //M0
   pinMode(M1,OUTPUT);  //M1
-  digitalWrite(M0, LOW);
-  digitalWrite(M1, HIGH);
+  digitalWrite(M0, HIGH);
+  digitalWrite(M1, LOW);
   int ms = MAP_SysCtlClockGet()/1000;
   
   MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);  
   MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
+  MAP_SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
   
   MAP_TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
   MAP_TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
+  MAP_TimerConfigure(TIMER2_BASE, TIMER_CFG_PERIODIC);
   
   MAP_TimerLoadSet(TIMER0_BASE, TIMER_A, 100*ms);  //3s
   MAP_TimerLoadSet(TIMER1_BASE, TIMER_A, 5000*ms);
+  MAP_TimerLoadSet(TIMER2_BASE, TIMER_A, 20000*ms);
   
   TimerIntRegister(TIMER0_BASE, TIMER_A, &Timer0IntHandler);
   TimerIntRegister(TIMER1_BASE, TIMER_A, &Timer1IntHandler);
+  TimerIntRegister(TIMER2_BASE, TIMER_A, &Timer2IntHandler);
   
   //MAP_TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
   //IntEnable(INT_TIMER0A);
   //IntMasterEnable(); 
   //MAP_TimerEnable(TIMER0_BASE, TIMER_A);
-  
+
+  MAP_TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+  MAP_TimerEnable(TIMER1_BASE, TIMER_A);
 }
 
 void loop()
@@ -67,7 +76,7 @@ void loop()
       data0 = data0.substring(0, data0.length()-1);
       a = 1;
     }
-    else if(inputString2.indexOf("Data1") != -1) {
+    else if(inputString2.indexOf("Node1") != -1) {
       data1 = inputString2;
       b = 1;
     }
@@ -75,17 +84,32 @@ void loop()
       MAP_TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
       MAP_TimerIntDisable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
       MAP_TimerDisable(TIMER1_BASE, TIMER_A);
+      MAP_TimerIntEnable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+      MAP_TimerEnable(TIMER2_BASE, TIMER_A);
       Serial.println("Waiting to suspend!");
       Serial.flush();
       delay(100);
       c = 0;
     }
     else if(inputString2.indexOf("Suspend!") != -1) {
+      MAP_TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+      MAP_TimerIntDisable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+      MAP_TimerDisable(TIMER2_BASE, TIMER_A);
       GoToSuspend = true;
     }
     
     inputString2 = "";
     stringComplete2 = false;
+  }
+
+  if((Count==4) && (a==0)) {
+    a = 1;
+    data0="Data0,NaN,NaN ";
+  }
+
+  if((Count1==4) && (b==0)) {
+    b = 1;
+    data1="Node1,NaN,NaN \n";
   }
   
   if((a==1) && (b==1)) {
@@ -105,6 +129,8 @@ void loop()
      a = 0;
      b = 0;
      c = 0;
+     Count=0;
+     Count1=0;
      suspend();
   }
 }
@@ -161,6 +187,7 @@ void Timer1IntHandler() {
     Serial2.write(0x17);
     Serial2.println("Data");
     Serial2.flush();
+    Count++;
     delay(100);
   }
   if (b == 0) {
@@ -170,6 +197,7 @@ void Timer1IntHandler() {
     Serial2.write(0x17);
     Serial2.println("Data");
     Serial2.flush();
+    Count1++;
     delay(100);
   }
   if (c == 1) {
@@ -181,4 +209,11 @@ void Timer1IntHandler() {
     Serial2.flush();
     delay(100);
   }
+}
+
+void Timer2IntHandler() {
+  MAP_TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+  MAP_TimerIntDisable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+  MAP_TimerDisable(TIMER2_BASE, TIMER_A);
+  GoToSuspend = true;
 }
