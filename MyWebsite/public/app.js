@@ -12,7 +12,7 @@ var g1 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Temparature 0",
+		title: "Temperature 0",
 		titlePosition: "below",
 		label: "°C",
 		donut: true,
@@ -43,7 +43,7 @@ var g2 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Temparature 1",
+		title: "Temperature 1",
 		titlePosition: "below",
 		label: "°C",
 		donut: true,
@@ -73,7 +73,7 @@ var g3 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Temparature 2",
+		title: "Temperature 2",
 		titlePosition: "below",
 		label: "°C",
 		donut: true,
@@ -196,7 +196,7 @@ UpdateData();
 function UpdateData() {
 	var Time = (new Date()).getTime();
 	
-	var read_humid_0 = firebase.database().ref().child("Humidity 0");
+	var read_humid_0 = firebase.database().ref().child("Humidity/0");
 	read_humid_0.once('value', function(snapshot){
 	var globalChartData = parseFloat(snapshot.val());
 	var DataPoint = { x: Time, y: globalChartData };
@@ -204,7 +204,7 @@ function UpdateData() {
 	g4.refresh(snapshot.val());
 	});
 		
-	var read_humid_1 = firebase.database().ref().child("Humidity 1");  
+	var read_humid_1 = firebase.database().ref().child("Humidity/1");  
 	read_humid_1.once('value', function(snapshot){
 	var globalChartData = parseFloat(snapshot.val());
 	var DataPoint = { x: Time, y: globalChartData };
@@ -212,7 +212,7 @@ function UpdateData() {
 	g5.refresh(snapshot.val());
 	});
 
-	var read_humid_2 = firebase.database().ref().child("Humidity 2");  
+	var read_humid_2 = firebase.database().ref().child("Humidity/2");  
 	read_humid_2.once('value', function(snapshot){
 	var globalChartData = parseFloat(snapshot.val());
 	var DataPoint = { x: Time, y: globalChartData };
@@ -220,7 +220,7 @@ function UpdateData() {
 	g6.refresh(snapshot.val());
 	});
 	
-	var read_temp_0 = firebase.database().ref().child("Temparature 0");  
+	var read_temp_0 = firebase.database().ref().child("Temperature/0");  
 	read_temp_0.once('value', function(snapshot){
 	var globalChartData = parseFloat(snapshot.val());
 	var DataPoint = { x: Time, y: globalChartData };
@@ -228,7 +228,7 @@ function UpdateData() {
 	g1.refresh(snapshot.val());
 	});
 	
-	var read_temp_1 = firebase.database().ref().child("Temparature 1");  
+	var read_temp_1 = firebase.database().ref().child("Temperature/1");  
 	read_temp_1.once('value', function(snapshot){
 	var globalChartData = parseFloat(snapshot.val());
 	var DataPoint = { x: Time, y: globalChartData };
@@ -236,7 +236,7 @@ function UpdateData() {
 	g2.refresh(snapshot.val());
 	});
 
-	var read_temp_2 = firebase.database().ref().child("Temparature 2");  
+	var read_temp_2 = firebase.database().ref().child("Temperature/2");  
 	read_temp_2.once('value', function(snapshot){
 	var globalChartData = parseFloat(snapshot.val());
 	var DataPoint = { x: Time, y: globalChartData };
@@ -285,7 +285,7 @@ var chart0;
 					name: 'Humidity 0 (%)',
 					data: []
 				},{
-					name: 'Temparature 0 (°C)',
+					name: 'Temperature 0 (°C)',
 					data: []
 				}]
             });
@@ -331,7 +331,7 @@ var chart1;
 					name: 'Humidity 1 (%)',
 					data: []
 				},{
-					name: 'Temparature 1 (°C)',
+					name: 'Temperature 1 (°C)',
 					data: []
 				}]
             });
@@ -377,7 +377,7 @@ var chart2;
 					name: 'Humidity 2 (%)',
 					data: []
 				},{
-					name: 'Temparature 2 (°C)',
+					name: 'Temperature 2 (°C)',
 					data: []
 				}]
             });
