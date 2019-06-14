@@ -19,12 +19,17 @@
 SoftwareSerial mySerial(D1, D2);
 String inputString = "";
 boolean stringComplete = false;
+boolean interrupt = true;
+boolean allow_check = false;
 String Humi1,Temp1,Temp2,Humi2,Temp3,Humi3 ;
 int T1, H1, T2, H2, T3, H3, S;
-static int Count=0; 
+static int Count=1; 
 static int a = 0;
 static int b = 0;
 //WiFiClient client;
+Ticker flipper;
+
+void Check_Connection();
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
@@ -54,7 +59,20 @@ void setup() {
 }
 
 void loop() {
+  if (interrupt) {
+    Serial.println("Vao set timmer");
+    flipper.attach(15, Check_Connection);
+    interrupt = false;   
+  }
+  while (mySerial.available()) {
+    char inChar = (char)mySerial.read();    
+    inputString += inChar;
+    if (inChar == '\n') {
+      stringComplete = true;
+    }
+  }    
   if (stringComplete) {
+    flipper.detach();
     digitalWrite(LED_BUILTIN, LOW);
     int i = 0;
     int m = 0;
@@ -69,7 +87,7 @@ void loop() {
        mySerial.write(0x18);
        mySerial.println("Stop Sending!");
        delay(100);
-      for (; i < stringlength; i++) {
+       for (; i < stringlength; i++) {
         if (inputString.charAt(i) == ',') {
           T1 = i; i++;
           for (; i < stringlength; i++) {
@@ -178,10 +196,11 @@ void loop() {
  
       inputString = "";
       stringComplete = false;
+      interrupt = true;
       //Serial.println("Deep Sleep!");
       //ESP.deepSleep(0);
     }
-    if ((a==1) && (b ==1))
+    if ((a==1) && (b==1))
     {
     /*
     if (client.connect(server, 80)) {
@@ -211,6 +230,8 @@ void loop() {
       mySerial.println("Suspend!");
       delay(100);
       */
+      flipper.detach();
+      
       if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
         Firebase.setString("Alert", "0");
         Serial.println("Good Connection");
@@ -255,12 +276,32 @@ void loop() {
       digitalWrite(LED_BUILTIN, HIGH);
       a=0;
       b=0;
+      interrupt = true;
     }
-      while (mySerial.available()) {
-        char inChar = (char)mySerial.read();
-        inputString += inChar;
-        if (inChar == '\n') {
-        stringComplete = true;
+    if (allow_check) {
+      allow_check = false;
+      if ((a==0) && (b==0)) {
+        Firebase.setString("Alert", "8");
+        delay(50);
+        Serial.println("Sink 1 & Sink 2 lost connection");
+        digitalWrite(LED_BUILTIN, HIGH);
       }
-     }
+      else if ((a==0) && (b == 1)) {
+        Firebase.setString("Alert", "9");
+        Serial.println("Sink 1 lost connection");
+        digitalWrite(LED_BUILTIN, HIGH);
+        b = 0;
+      }
+      else if ((a == 1) && (b == 0)) {
+        Firebase.setString("Alert", "10");
+        Serial.println("Sink 2 lost connection");
+        digitalWrite(LED_BUILTIN, HIGH);
+        a = 0;
+      }
+    }
+}
+
+void Check_Connection() {
+    Serial.println("Vao ngat");
+    allow_check = true;   
 }
