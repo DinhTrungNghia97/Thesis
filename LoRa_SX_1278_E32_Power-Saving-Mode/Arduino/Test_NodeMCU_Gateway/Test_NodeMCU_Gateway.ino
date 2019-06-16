@@ -61,7 +61,7 @@ void setup() {
 void loop() {
   if (interrupt) {
     Serial.println("Vao set timmer");
-    flipper.attach(15, Check_Connection);
+    flipper.attach(30, Check_Connection);
     interrupt = false;   
   }
   while (mySerial.available()) {
@@ -263,7 +263,40 @@ void loop() {
       else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
         Firebase.setString("Alert", "7");
         Serial.println("Node 1&3 Abort");
-      }        
+      }
+      delay(50);
+      if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
+        Firebase.setString("Sensor", "0");
+        Serial.println("All sensor collected");
+      }
+      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
+        Firebase.setString("Sensor", "1");
+        Serial.println("All sensor fail");
+      }
+      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
+        Firebase.setString("Sensor", "2");
+        Serial.println("Sensor node 1 fail");
+      } 
+      else if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
+        Firebase.setString("Sensor", "3");
+        Serial.println("Sensor node 2 fail");
+      }
+      else if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
+        Firebase.setString("Sensor", "4");
+        Serial.println("Sensor node 3 fail");
+      }
+      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
+        Firebase.setString("Sensor", "5");
+        Serial.println("Sensor node 1 & 2 fail");
+      }
+      else if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
+        Firebase.setString("Sensor", "6");
+        Serial.println("Sensor node 2 & 3 fail");
+      } 
+      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
+        Firebase.setString("Sensor", "7");
+        Serial.println("Sensor node 1 & 3 fail");
+      }     
       delay(50);
       Firebase.setFloat("Count", Count);
       delay(50);

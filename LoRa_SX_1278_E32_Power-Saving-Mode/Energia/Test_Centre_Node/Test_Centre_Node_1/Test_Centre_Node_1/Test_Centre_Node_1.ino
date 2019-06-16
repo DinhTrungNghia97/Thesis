@@ -93,12 +93,16 @@ void loop()
       MAP_TimerDisable(TIMER2_BASE, TIMER_A);
       GoToSuspend = true;
     }
+    else if(inputString2.indexOf("Sensor node 1") != -1) {
+      data2="Data2,fail,fail \n";
+      a = 1;
+    }
     
     inputString2 = "";
     stringComplete2 = false;
   }
 
-  if((Count==4) && (a==0)) {
+  if((Count==3) && (a==0)) {
     a = 1;
     data2="Data2,NaN,NaN \n";
   }
