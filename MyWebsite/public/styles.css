@@ -232,4 +232,32 @@ _:-ms-input-placeholder, :root .demo-graph {
     height: 210px;
 }
 
+#view-source {
+	position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 1390px;
+    margin-bottom: 40px;
+    z-index: 900;
+} 
 
+.open-button {
+	position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+} 
+
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 80px;
+  right: 31px;
+  border: 2px solid #000000;
+  z-index: 9;
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>My Thesis</title>
+    <link rel="stylesheet" href="semantic.css">
+    <link rel="stylesheet" href="Login.css">
+
+</head>
+
+<body>
+    <!-- Login Form -->
+    <div class="loginform">
+        <h1>LOGIN</h1>
+        <div class="ui form">
+		
+            <div class="field">
+                <label>Username</label>
+                <input type="email" id="txt_username" placeholder="Email....">
+            </div>
+			
+            <div class="field">
+                <label>Password</label>
+                <input type="password" id="txt_password" placeholder="Password....">
+            </div>
+
+            <button class="ui button" onclick="login()">Submit</button>      
+        </div>
+    </div>
+
+    <!-- particles.js container -->
+
+	<script src="https://www.gstatic.com/firebasejs/6.1.0/firebase.js"></script>
+
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCOgSccKVaeiII58CtLexokfn0lKwgeOUE",
+			authDomain: "thesis-lora-sx-1278-e32.firebaseapp.com",
+			databaseURL: "https://thesis-lora-sx-1278-e32.firebaseio.com",
+			projectId: "thesis-lora-sx-1278-e32",
+			storageBucket: "thesis-lora-sx-1278-e32.appspot.com",
+			messagingSenderId: "163358699031"
+		};
+		firebase.initializeApp(config);
+	</script>
+	
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html> 

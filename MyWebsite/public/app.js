@@ -4,7 +4,130 @@ var humid1 = document.getElementById("humid1");
 var temp0 = document.getElementById("temp0");
 var temp1 = document.getElementById("temp1");
 */
+var con_status = firebase.database().ref().child("Alert");
+	con_status.on('value', function(snapshot){
+	if (snapshot.val() == "0") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "1") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "2") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "3") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "4") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "5") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "6") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "7") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "8") {
+		status1.innerHTML = "Failed";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Unknown";
+		status4.innerHTML = "Unknown";
+		status5.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "9") {
+		status1.innerHTML = "Failed";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Unknown";
+		status4.innerHTML = "Unknown";
+		status5.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "10") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Unknown";
+	}
+});
 
+var sen_status = firebase.database().ref().child("Sensor");
+	sen_status.on('value', function(snapshot){
+	if (snapshot.val() == "0") {
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "1") {
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "2") {
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "3") {
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "4") {
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "5") {
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "6") {
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "7") {
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Failed";
+	}
+});
 
 var g1 = new JustGage({
 		id: 'g1',
@@ -12,7 +135,7 @@ var g1 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Temperature 0",
+		title: "Temperature 1",
 		titlePosition: "below",
 		label: "°C",
 		donut: true,
@@ -43,7 +166,7 @@ var g2 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Temperature 1",
+		title: "Temperature 2",
 		titlePosition: "below",
 		label: "°C",
 		donut: true,
@@ -73,7 +196,7 @@ var g3 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Temperature 2",
+		title: "Temperature 3",
 		titlePosition: "below",
 		label: "°C",
 		donut: true,
@@ -103,7 +226,7 @@ var g4 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Humidity 0",
+		title: "Humidity 1",
 		titlePosition: "below",
 		label: "%",
 		donut: true,
@@ -133,7 +256,7 @@ var g5 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Humidity 1",
+		title: "Humidity 2",
 		titlePosition: "below",
 		label: "%",
 		donut: true,
@@ -163,7 +286,7 @@ var g6 = new JustGage({
 		min: 0,
 		max: 100,
 		valueFontFamily: "Roboto",
-		title: "Humidity 2",
+		title: "Humidity 3",
 		titlePosition: "below",
 		label: "%",
 		donut: true,
@@ -282,10 +405,10 @@ var chart0;
                 },
 
 				series: [{
-					name: 'Humidity 0 (%)',
+					name: 'Humidity 1 (%)',
 					data: []
 				},{
-					name: 'Temperature 0 (°C)',
+					name: 'Temperature 1 (°C)',
 					data: []
 				}]
             });
@@ -328,10 +451,10 @@ var chart1;
                 },
 
 				series: [{
-					name: 'Humidity 1 (%)',
+					name: 'Humidity 2 (%)',
 					data: []
 				},{
-					name: 'Temperature 1 (°C)',
+					name: 'Temperature 2 (°C)',
 					data: []
 				}]
             });
@@ -374,11 +497,23 @@ var chart2;
                 },
 
 				series: [{
-					name: 'Humidity 2 (%)',
+					name: 'Humidity 3 (%)',
 					data: []
 				},{
-					name: 'Temperature 2 (°C)',
+					name: 'Temperature 3 (°C)',
 					data: []
 				}]
             });
-        });		
+        });
+var buttonstate=0;
+function openForm() {
+	buttonstate= 1 - buttonstate;
+	if(buttonstate) {
+		document.getElementById("myForm").style.display = "block";
+		document.getElementById("view-status").innerHTML = "Close";
+	}
+	else {
+		document.getElementById("myForm").style.display = "none";
+		document.getElementById("view-status").innerHTML = "View Status";
+	}
+}
