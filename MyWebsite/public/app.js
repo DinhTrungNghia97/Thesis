@@ -1,133 +1,407 @@
-/*
-var humid0 = document.getElementById("humid0");
-var humid1 = document.getElementById("humid1");
-var temp0 = document.getElementById("temp0");
-var temp1 = document.getElementById("temp1");
-*/
 var con_status = firebase.database().ref().child("Alert");
 	con_status.on('value', function(snapshot){
 	if (snapshot.val() == "0") {
+		status1.innerHTML = "Good"; //Sink 1
+		status2.innerHTML = "Good"; //Sink 2
+		status3.innerHTML = "Good"; //Node 1
+		status4.innerHTML = "Good"; //Node 2
+		status5.innerHTML = "Good"; //Node 3
+		status6.innerHTML = "Good"; //Sensor 1
+		status7.innerHTML = "Good"; //Sensor 2
+		status8.innerHTML = "Good"; //Sensor 3
+	}
+	else if (snapshot.val() == "1") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
 		status3.innerHTML = "Good";
 		status4.innerHTML = "Good";
 		status5.innerHTML = "Good";
-	}
-	else if (snapshot.val() == "1") {
-		status1.innerHTML = "Good";
-		status2.innerHTML = "Good";
-		status3.innerHTML = "Failed";
-		status4.innerHTML = "Failed";
-		status5.innerHTML = "Failed";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Good";
 	}
 	else if (snapshot.val() == "2") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
-		status3.innerHTML = "Failed";
+		status3.innerHTML = "Good";
 		status4.innerHTML = "Good";
 		status5.innerHTML = "Good";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Good";
 	}
 	else if (snapshot.val() == "3") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
 		status3.innerHTML = "Good";
-		status4.innerHTML = "Failed";
+		status4.innerHTML = "Good";
 		status5.innerHTML = "Good";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Failed";
 	}
 	else if (snapshot.val() == "4") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
 		status3.innerHTML = "Good";
 		status4.innerHTML = "Good";
-		status5.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Good";
 	}
 	else if (snapshot.val() == "5") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
-		status3.innerHTML = "Failed";
-		status4.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
 		status5.innerHTML = "Good";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Failed";
 	}
 	else if (snapshot.val() == "6") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
 		status3.innerHTML = "Good";
-		status4.innerHTML = "Failed";
-		status5.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Failed";
 	}
 	else if (snapshot.val() == "7") {
 		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
-		status3.innerHTML = "Failed";
+		status3.innerHTML = "Good";
 		status4.innerHTML = "Good";
-		status5.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Failed";
 	}
 	else if (snapshot.val() == "8") {
-		status1.innerHTML = "Failed";
-		status2.innerHTML = "Failed";
-		status3.innerHTML = "Unknown";
-		status4.innerHTML = "Unknown";
-		status5.innerHTML = "Unknown";
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
 	}
 	else if (snapshot.val() == "9") {
-		status1.innerHTML = "Failed";
+		status1.innerHTML = "Good";
 		status2.innerHTML = "Good";
-		status3.innerHTML = "Unknown";
-		status4.innerHTML = "Unknown";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
 		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Good";
 	}
 	else if (snapshot.val() == "10") {
 		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "11") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "12") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "13") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "14") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "15") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "16") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "17") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "18") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "19") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "20") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "21") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "22") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "23") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "24") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "25") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "26") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "27") {
+		status1.innerHTML = "Failed";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Unknown";
+		status4.innerHTML = "Unknown";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "28") {
+		status1.innerHTML = "Failed";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Unknown";
+		status4.innerHTML = "Unknown";
+		status5.innerHTML = "Failed";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "29") {
+		status1.innerHTML = "Failed";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Unknown";
+		status4.innerHTML = "Unknown";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Failed";
+	}
+	else if (snapshot.val() == "30") {
+		status1.innerHTML = "Failed";
+		status2.innerHTML = "Good";
+		status3.innerHTML = "Unknown";
+		status4.innerHTML = "Unknown";
+		status5.innerHTML = "Good";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Good";
+	}
+	else if (snapshot.val() == "31") {
+		status1.innerHTML = "Good";
 		status2.innerHTML = "Failed";
 		status3.innerHTML = "Good";
 		status4.innerHTML = "Good";
 		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "32") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "33") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "34") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "35") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Good";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "36") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Good";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Failed";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "37") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Good";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "38") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Good";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Failed";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
+	}
+	else if (snapshot.val() == "39") {
+		status1.innerHTML = "Good";
+		status2.innerHTML = "Failed";
+		status3.innerHTML = "Failed";
+		status4.innerHTML = "Failed";
+		status5.innerHTML = "Unknown";
+		status6.innerHTML = "Unknown";
+		status7.innerHTML = "Unknown";
+		status8.innerHTML = "Unknown";
 	}
 });
 
-var sen_status = firebase.database().ref().child("Sensor");
-	sen_status.on('value', function(snapshot){
-	if (snapshot.val() == "0") {
-		status6.innerHTML = "Good";
-		status7.innerHTML = "Good";
-		status8.innerHTML = "Good";
-	}
-	else if (snapshot.val() == "1") {
-		status6.innerHTML = "Failed";
-		status7.innerHTML = "Failed";
-		status8.innerHTML = "Failed";
-	}
-	else if (snapshot.val() == "2") {
-		status6.innerHTML = "Failed";
-		status7.innerHTML = "Good";
-		status8.innerHTML = "Good";
-	}
-	else if (snapshot.val() == "3") {
-		status6.innerHTML = "Good";
-		status7.innerHTML = "Failed";
-		status8.innerHTML = "Good";
-	}
-	else if (snapshot.val() == "4") {
-		status6.innerHTML = "Good";
-		status7.innerHTML = "Good";
-		status8.innerHTML = "Failed";
-	}
-	else if (snapshot.val() == "5") {
-		status6.innerHTML = "Failed";
-		status7.innerHTML = "Failed";
-		status8.innerHTML = "Good";
-	}
-	else if (snapshot.val() == "6") {
-		status6.innerHTML = "Good";
-		status7.innerHTML = "Failed";
-		status8.innerHTML = "Failed";
-	}
-	else if (snapshot.val() == "7") {
-		status6.innerHTML = "Failed";
-		status7.innerHTML = "Good";
-		status8.innerHTML = "Failed";
-	}
-});
 
 var g1 = new JustGage({
 		id: 'g1',

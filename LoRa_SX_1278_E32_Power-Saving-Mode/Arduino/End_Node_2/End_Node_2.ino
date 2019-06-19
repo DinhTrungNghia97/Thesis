@@ -1,5 +1,5 @@
 //Author Dinh Trung Nghia
-//LoRa SX1278 (433 MHz UART) - Node 0
+//LoRa SX1278 (433 MHz UART) - Node 1
 #include <SoftwareSerial.h>
 #include <avr/sleep.h>
 #include "DHT.h"
@@ -16,7 +16,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(115200);
-  mySerial.begin(19200);
+  mySerial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(AUX, INPUT_PULLUP);
   digitalWrite(LED_BUILTIN, HIGH);
@@ -32,7 +32,7 @@ void loop() {
   if((digitalRead(AUX) == 1) && (gotosleep == true)) {
     Going_To_Sleep();
   }
-  if(mySerial.available() > 0){
+  if(mySerial.available() > 0){//Read from UM402 and send to serial monitor
     String input = mySerial.readString();
     Serial.println(input);
     float h = dht.readHumidity();
@@ -41,19 +41,18 @@ void loop() {
       if (isnan(h) || isnan(t)) {
         Serial.println("Failed to read from DHT sensor!");
         mySerial.write(0x01);
-        mySerial.write(0x25);
+        mySerial.write(0x26);
         mySerial.write(0x18);
-        mySerial.println("Sensor node 0: Failed to read from DHT sensor!");
+        mySerial.println("Sensor node 1: Failed to read from DHT sensor!");
         delay(100);
         while(digitalRead(AUX) == 0) {}
         gotosleep = true;
       }
       else {
         mySerial.write(0x01);
-        mySerial.write(0x25);
+        mySerial.write(0x26);
         mySerial.write(0x18);
-        mySerial.println("Data0," + String(t) + "," + String(h));
-        Serial.println(String(t) + " " + String(h));
+        mySerial.println("Data2," + String(t) + "," + String(h));
         while(digitalRead(AUX) == 0) {}
         gotosleep = true;
       }

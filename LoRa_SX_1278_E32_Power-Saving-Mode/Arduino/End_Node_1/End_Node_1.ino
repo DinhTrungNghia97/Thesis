@@ -15,7 +15,7 @@ const int DHTTYPE = DHT22;
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  Serial.begin(19200);
+  Serial.begin(115200);
   mySerial.begin(19200);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(AUX, INPUT_PULLUP);
@@ -32,25 +32,28 @@ void loop() {
   if((digitalRead(AUX) == 1) && (gotosleep == true)) {
     Going_To_Sleep();
   }
-  if(mySerial.available() > 0){//Read from UM402 and send to serial monitor
+  if(mySerial.available() > 0){
     String input = mySerial.readString();
     Serial.println(input);
     float h = dht.readHumidity();
-    float t = dht.readTemperature();  
-    if (input.indexOf("Data1") != -1) {
+    float t = dht.readTemperature();
+    if (input.indexOf("Data") != -1) {
       if (isnan(h) || isnan(t)) {
         Serial.println("Failed to read from DHT sensor!");
         mySerial.write(0x01);
         mySerial.write(0x25);
-        mySerial.write(0x19);
+        mySerial.write(0x18);
         mySerial.println("Sensor node 1: Failed to read from DHT sensor!");
         delay(100);
+        while(digitalRead(AUX) == 0) {}
+        gotosleep = true;
       }
       else {
         mySerial.write(0x01);
         mySerial.write(0x25);
-        mySerial.write(0x19);
-        mySerial.println("Data1," + String(t) + "," + String(h));
+        mySerial.write(0x18);
+        mySerial.println("Node1," + String(t) + "," + String(h));
+        Serial.println(String(t) + " " + String(h));
         while(digitalRead(AUX) == 0) {}
         gotosleep = true;
       }

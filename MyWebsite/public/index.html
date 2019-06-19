@@ -1,20 +1,4 @@
 <!doctype html>
-<!--
-  Material Design Lite
-  Copyright 2015 Google Inc. All rights reserved.
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      https://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License
--->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -23,33 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Data Tracking</title>
 
-    <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="images/android-desktop.png">
 
-    <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Material Design Lite">
     <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
 
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
+	
     <link rel="shortcut icon" href="images/favicon.png">
-
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
 	<link rel="stylesheet" type="text/css" href="highcharts.css">
-    <link rel="stylesheet" href="styles.css">
-
+    <link rel="stylesheet" href="styles.css">	
   </head>
   <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -76,39 +50,7 @@
           </ul>
         </div>
       </header>
-	  <!--
-      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-        <header class="demo-drawer-header">
-          <img src="images/user.jpg" class="demo-avatar">
-          <div class="demo-avatar-dropdown">
-            <span id="Username">hello@example.com</span>
-            <div class="mdl-layout-spacer"></div>
-            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-              <i class="material-icons" role="presentation">arrow_drop_down</i>
-              <span class="visuallyhidden">Accounts</span>
-            </button>
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-              <li class="mdl-menu__item">hello@example.com</li>
-              <li class="mdl-menu__item">info@example.com</li>
-              <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
-            </ul>
-          </div>
-        </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
-          <div class="mdl-layout-spacer"></div>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
-        </nav>
-      </div>
-	  -->
+
       <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid demo-content">
 			<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
@@ -133,102 +75,20 @@
 				<div class="container">
 					<div id="g6" class="gauge"></div>
 				</div>
-			
-			<!--
-            <svg fill="currentColor" width="200px" height="260px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <text font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.01" x="0.495" y="0.95">Temparature 0</text>
-			  <circle cx="0.5" cy="0.4" r="0.37" stroke="#ACEC00" stroke-width="0.05" fill="white"></circle>
-			  <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)"></path>
-			  <!-- <use xlink:href="#piechart" mask="url(#piemask)" /> -->
-             <!-- <text id="temp0" x="0.5" y="0.37" font-family="Roboto" font-size="0.22" fill="#888" text-anchor="middle" dy="0.1"></text>
-			  <text x="0.47" y="0.41" font-family="Roboto" font-size="0.15" fill="#888" text-anchor="middle" dy="0.25">°C</text>
-            </svg>
-            <svg fill="currentColor" width="200px" height="260px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <text font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.01" x="0.495" y="0.95">Temparature 1</text>
-			  <circle cx="0.5" cy="0.4" r="0.37" stroke="#00BBD6" stroke-width="0.05" fill="white"></circle>
-			  <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)"></path>
-			  <!-- <use xlink:href="#piechart" mask="url(#piemask)" /> 
-              <text id="temp1" x="0.5" y="0.37" font-family="Roboto" font-size="0.22" fill="#888" text-anchor="middle" dy="0.1"></text>
-			  <text x="0.47" y="0.41" font-family="Roboto" font-size="0.15" fill="#888" text-anchor="middle" dy="0.25">°C</text>
-            </svg>
-            <svg fill="currentColor" width="200px" height="260px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <text font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.01" x="0.495" y="0.95">Humidity 0</text>
-			  <circle cx="0.5" cy="0.4" r="0.37" stroke="#BA65C9" stroke-width="0.05" fill="white"></circle>
-			  <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)"></path>
-			  <!-- <use xlink:href="#piechart" mask="url(#piemask)" /> 
-              <text id="humid0" x="0.5" y="0.37" font-family="Roboto" font-size="0.22" fill="#888" text-anchor="middle" dy="0.1"></text>
-			  <text x="0.5" y="0.41" font-family="Roboto" font-size="0.15" fill="#888" text-anchor="middle" dy="0.25">%</text>
-            </svg>
-            <svg fill="currentColor" width="200px" height="260px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--4-col mdl-cell--3-col-desktop">
-              <text font-family="Roboto" font-size="0.1" fill="#888" text-anchor="middle" dy="0.01" x="0.495" y="0.95">Humidity 1</text>
-			  <circle cx="0.5" cy="0.4" r="0.37" stroke="#EF3C79" stroke-width="0.05" fill="white"></circle>
-			  <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)"></path>
-			  <!-- <use xlink:href="#piechart" mask="url(#piemask)" /> 
-              <text id="humid1" x="0.5" y="0.37" font-family="Roboto" font-size="0.22" fill="#888" text-anchor="middle" dy="0.1"></text>
-			  <text x="0.5" y="0.41" font-family="Roboto" font-size="0.15" fill="#888" text-anchor="middle" dy="0.25">%</text>
-            </svg> <!-- -->
 			</div>
+			
 			<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
 				<div id="g7" class="mdl-cell mdl-cell--12-col" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			</div>
+			
 			<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
 				<div id="g8" class="mdl-cell mdl-cell--12-col" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			</div>
+			
 			<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
 				<div id="g9" class="mdl-cell mdl-cell--12-col"style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 			</div>
-		  <!--
-          <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
-			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Temparature+Node+0&type=line&xaxis=Time&yaxis=Value+%28%C2%B0C%29"></iframe>
-			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Temparature+Node+1&type=line&xaxis=Time&yaxis=Value+%28%C2%B0C%29"></iframe>
-			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Temparature+Node+2&type=line&xaxis=Time&yaxis=Value+%28%C2%B0C%29"></iframe>
-		  </div>
-          <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--6-col">
-			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Humidity+Node+0&type=line&xaxis=Time&yaxis=Value+%28%25%29"></iframe>
-			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Humidity+Node+1&type=line&xaxis=Time&yaxis=Value+%28%25%29"></iframe>
-			<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/741345/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=10&title=Humidity+Node+2&type=line&xaxis=Time&yaxis=Value+%28%25%29"></iframe>
-		  </div>
-		  -->
-
-			<!--
-            <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-              <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-                <h3>View options</h3>
-                <ul>
-                  <li>
-                    <label for="chkbox1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                      <input type="checkbox" id="chkbox1" class="mdl-checkbox__input">
-                      <span class="mdl-checkbox__label">Click per object</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label for="chkbox2" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                      <input type="checkbox" id="chkbox2" class="mdl-checkbox__input">
-                      <span class="mdl-checkbox__label">Views per object</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label for="chkbox3" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                      <input type="checkbox" id="chkbox3" class="mdl-checkbox__input">
-                      <span class="mdl-checkbox__label">Objects selected</span>
-                    </label>
-                  </li>
-                  <li>
-                    <label for="chkbox4" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                      <input type="checkbox" id="chkbox4" class="mdl-checkbox__input">
-                      <span class="mdl-checkbox__label">Objects viewed</span>
-                    </label>
-                  </li>
-                </ul>
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
-                <div class="mdl-layout-spacer"></div>
-                <i class="material-icons">location_on</i>
-              </div>
-            </div>
-			-->
-
+			
 			<table class="mdl-data-table mdl-js-data-table form-popup" id="myForm">
 				<thead>
 					<tr>
@@ -264,11 +124,11 @@
 						<td class="mdl-data-table__cell--non-numeric"><span id="status8"></span></td>
 					</tr>
 				</tbody>
-			</table>
-          </div>
-		  
+			</table>	
+        </div>  
 	  </main>
-    </div>	  
+    </div>	
+	
     <a href="https://github.com/DinhTrungNghia97/Thesis" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>
 	<button class="open-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white" onclick="openForm()"><span id="view-status">View Status</span></button>
 	

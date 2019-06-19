@@ -56,11 +56,6 @@ void setup()
   TimerIntRegister(TIMER0_BASE, TIMER_A, &Timer0IntHandler);
   TimerIntRegister(TIMER1_BASE, TIMER_A, &Timer1IntHandler);
   TimerIntRegister(TIMER2_BASE, TIMER_A, &Timer2IntHandler);
-  
-  //MAP_TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
-  //IntEnable(INT_TIMER0A);
-  //IntMasterEnable(); 
-  //MAP_TimerEnable(TIMER0_BASE, TIMER_A);
 
   MAP_TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
   MAP_TimerEnable(TIMER1_BASE, TIMER_A);
@@ -154,15 +149,7 @@ void Timer0IntHandler() {
   digitalWrite(RED_LED, HIGH);
   Serial.println("Wake up!");
   Serial.flush();
-  //Send request to Node 0
-  /*
-  Serial2.write(0x01);
-  Serial2.write(0x23);
-  Serial2.write(0x17);
-  Serial2.println("Data0");
-  Serial2.flush();
-  delay(100); */
-  //Send request to Node 1
+  //Send request to Node 
   Serial2.write(0xFF);
   Serial2.write(0xFF);
   Serial2.write(0x16);
@@ -183,17 +170,6 @@ void Timer1IntHandler() {
     Count++;
     delay(100);
   }
-  /*
-  if (b == 0) {
-    Serial.println("Hello 1");
-    Serial2.write(0x01);
-    Serial2.write(0x24);
-    Serial2.write(0x17);
-    Serial2.println("Data");
-    Serial2.flush();
-    delay(100);
-  }
-  */
   if (c == 1) {
     Serial.print(datasend);
     Serial2.write(0x01);

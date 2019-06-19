@@ -61,7 +61,7 @@ void setup() {
 void loop() {
   if (interrupt) {
     Serial.println("Vao set timmer");
-    flipper.attach(30, Check_Connection);
+    flipper.attach(25, Check_Connection);
     interrupt = false;   
   }
   while (mySerial.available()) {
@@ -232,71 +232,128 @@ void loop() {
       */
       flipper.detach();
       
-      if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
-        Firebase.setString("Alert", "0");
-        Serial.println("Good Connection");
+      if (((Temp1 != "NaN") || (Humi1 != "NaN")) && ((Temp2 != "NaN") || (Humi2 != "NaN")) && ((Temp3 != "NaN") || (Humi3 != "NaN"))) {
+        if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 != "fail") || (Humi2 != "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "0");
+          Serial.println("Good Connection and All sensor good");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 != "fail") || (Humi2 != "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "1");
+          Serial.println("Good Connection and sensor 1 failed");
+        }
+        else if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 == "fail") || (Humi2 == "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "2");
+          Serial.println("Good Connection and sensor 2 failed");
+        }
+        else if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 != "fail") || (Humi2 != "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "3");
+          Serial.println("Good Connection and sensor 3 failed");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 == "fail") || (Humi2 == "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "4");
+          Serial.println("Good Connection and sensor 1 & sensor 2 failed");
+        }
+        else if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 == "fail") || (Humi2 == "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "5");
+          Serial.println("Good Connection and sensor 2 & sensor 3 failed");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 != "fail") || (Humi2 != "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "6");
+          Serial.println("Good Connection and sensor 1 & sensor 3 failed");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 == "fail") || (Humi2 == "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "7");
+          Serial.println("Good Connection and All sensor failed");
+        }
       }
-      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
-        Firebase.setString("Alert", "1");
+      else if (((Temp1 == "NaN") || (Humi1 == "NaN")) && ((Temp2 == "NaN") || (Humi2 == "NaN")) && ((Temp3 == "NaN") || (Humi3 == "NaN"))) {
+        Firebase.setString("Alert", "8");
         Serial.println("All Abort");
       }
-      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
-        Firebase.setString("Alert", "2");
-        Serial.println("Node 1 Abort");
+      else if (((Temp1 == "NaN") || (Humi1 == "NaN")) && ((Temp2 != "NaN") || (Humi2 != "NaN")) && ((Temp3 != "NaN") || (Humi3 != "NaN"))) {
+        if (((Temp2 != "fail") || (Humi2 != "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "9");
+          Serial.println("Node 1 Abort and sensor 2 & sensor 3 good");
+        }
+        else if (((Temp2 == "fail") || (Humi2 == "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "10");
+          Serial.println("Node 1 Abort and sensor 2 failed");
+        }
+        else if (((Temp2 != "fail") || (Humi2 != "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "11");
+          Serial.println("Node 1 Abort and sensor 3 failed");
+        }
+        else if (((Temp2 == "fail") || (Humi2 == "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "12");
+          Serial.println("Node 1 Abort and sensor 2 & sensor 3 failed");
+        }
       }
-      else if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
-        Firebase.setString("Alert", "3");
-        Serial.println("Node 2 Abort");
+      else if (((Temp1 != "NaN") || (Humi1 != "NaN")) && ((Temp2 == "NaN") || (Humi2 == "NaN")) && ((Temp3 != "NaN") || (Humi3 != "NaN"))) {
+        if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "13");
+          Serial.println("Node 2 Abort and sensor 1 & sensor 3 good");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp3 != "fail") || (Humi3 != "fail"))) {
+          Firebase.setString("Alert", "14");
+          Serial.println("Node 2 Abort and sensor 1 failed");
+        }
+        else if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "15");
+          Serial.println("Node 2 Abort and sensor 3 failed");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp3 == "fail") || (Humi3 == "fail"))) {
+          Firebase.setString("Alert", "16");
+          Serial.println("Node 2 Abort and sensor 1 & sensor 3 failed");
+        }
       }
-      else if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
-        Firebase.setString("Alert", "4");
-        Serial.println("Node 3 Abort");
+      else if (((Temp1 != "NaN") || (Humi1 != "NaN")) && ((Temp2 != "NaN") || (Humi2 != "NaN")) && ((Temp3 == "NaN") || (Humi3 == "NaN"))) {
+        if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 != "fail") || (Humi2 != "fail"))) {
+          Firebase.setString("Alert", "17");
+          Serial.println("Node 3 Abort and sensor 1 & sensor 2 good");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 != "fail") || (Humi2 != "fail"))) {
+          Firebase.setString("Alert", "18");
+          Serial.println("Node 3 Abort and sensor 1 failed");
+        }
+        else if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 == "fail") || (Humi2 == "fail"))) {
+          Firebase.setString("Alert", "19");
+          Serial.println("Node 3 Abort and sensor 2 failed");
+        }
+        else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 == "fail") || (Humi2 == "fail"))) {
+          Firebase.setString("Alert", "20");
+          Serial.println("Node 2 Abort and sensor 1 & sensor 2 failed");
+        }
       }
-      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 != "NaN") && (Humi3 != "NaN")) {
-        Firebase.setString("Alert", "5");
-        Serial.println("Node 1&2 Abort");
+      else if (((Temp1 == "NaN") || (Humi1 == "NaN")) && ((Temp2 == "NaN") || (Humi2 == "NaN")) && ((Temp3 != "NaN") || (Humi3 != "NaN"))) {
+        if ((Temp3 != "fail") || (Humi3 != "fail")) {
+          Firebase.setString("Alert", "21");
+          Serial.println("Node 1&2 Abort and sensor 3 good");
+        }
+        else if ((Temp3 == "fail") || (Humi3 == "fail")) {
+          Firebase.setString("Alert", "22");
+          Serial.println("Node 1&2 Abort and sensor 3 failed");
+        }
       }
-      else if ((Temp1 != "NaN") && (Humi1 != "NaN") && (Temp2 == "NaN") && (Humi2 == "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
-        Firebase.setString("Alert", "6");
-        Serial.println("Node 2&3 Abort");
+      else if (((Temp1 != "NaN") || (Humi1 != "NaN")) && ((Temp2 == "NaN") || (Humi2 == "NaN")) && ((Temp3 == "NaN") || (Humi3 == "NaN"))) {
+        if ((Temp1 != "fail") || (Humi1 != "fail")) {
+          Firebase.setString("Alert", "23");
+          Serial.println("Node 2&3 Abort and sensor 1 good");
+        }
+        else if ((Temp1 == "fail") || (Humi1 == "fail")) {
+          Firebase.setString("Alert", "24");
+          Serial.println("Node 2&3 Abort and sensor 1 failed");
+        }
       }
-      else if ((Temp1 == "NaN") && (Humi1 == "NaN") && (Temp2 != "NaN") && (Humi2 != "NaN") && (Temp3 == "NaN") && (Humi3 == "NaN")) {
-        Firebase.setString("Alert", "7");
-        Serial.println("Node 1&3 Abort");
+      else if (((Temp1 == "NaN") || (Humi1 == "NaN")) && ((Temp2 != "NaN") || (Humi2 != "NaN")) && ((Temp3 == "NaN") || (Humi3 == "NaN"))) {
+        if ((Temp2 != "fail") || (Humi2 != "fail")) {
+          Firebase.setString("Alert", "25");
+          Serial.println("Node 1&3 Abort and sensor 2 good");
+        }
+        else if ((Temp2 == "fail") || (Humi2 == "fail")) {
+          Firebase.setString("Alert", "26");
+          Serial.println("Node 1&3 Abort and sensor 2 failed");
+        }
       }
-      delay(50);
-      if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
-        Firebase.setString("Sensor", "0");
-        Serial.println("All sensor collected");
-      }
-      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
-        Firebase.setString("Sensor", "1");
-        Serial.println("All sensor fail");
-      }
-      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
-        Firebase.setString("Sensor", "2");
-        Serial.println("Sensor node 1 fail");
-      } 
-      else if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
-        Firebase.setString("Sensor", "3");
-        Serial.println("Sensor node 2 fail");
-      }
-      else if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
-        Firebase.setString("Sensor", "4");
-        Serial.println("Sensor node 3 fail");
-      }
-      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 != "fail") && (Humi3 != "fail")) {
-        Firebase.setString("Sensor", "5");
-        Serial.println("Sensor node 1 & 2 fail");
-      }
-      else if ((Temp1 != "fail") && (Humi1 != "fail") && (Temp2 == "fail") && (Humi2 == "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
-        Firebase.setString("Sensor", "6");
-        Serial.println("Sensor node 2 & 3 fail");
-      } 
-      else if ((Temp1 == "fail") && (Humi1 == "fail") && (Temp2 != "fail") && (Humi2 != "fail") && (Temp3 == "fail") && (Humi3 == "fail")) {
-        Firebase.setString("Sensor", "7");
-        Serial.println("Sensor node 1 & 3 fail");
-      }     
       delay(50);
       Firebase.setFloat("Count", Count);
       delay(50);
@@ -314,21 +371,87 @@ void loop() {
     if (allow_check) {
       allow_check = false;
       if ((a==0) && (b==0)) {
-        Firebase.setString("Alert", "8");
+        flipper.detach();
+        Firebase.setString("Alert", "27");
         delay(50);
+        Firebase.setFloat("Count", Count);
+        delay(50);
+        Count++;
+        interrupt = true;
         Serial.println("Sink 1 & Sink 2 lost connection");
         digitalWrite(LED_BUILTIN, HIGH);
       }
       else if ((a==0) && (b == 1)) {
-        Firebase.setString("Alert", "9");
-        Serial.println("Sink 1 lost connection");
+        if ((Temp3 == "NaN") || (Humi3 == "NaN")) {
+          Firebase.setString("Alert", "28");
+          Serial.println("Sink 1 lost connection & Node 3 Abort");
+        }
+        else if ((Temp3 != "NaN") || (Humi3 != "NaN")) {
+          if ((Temp3 == "fail") || (Humi3 == "fail")) {
+            Firebase.setString("Alert", "29");
+            Serial.println("Sink 1 lost connection & Sensor Node 3 Failed");
+          }
+          else if ((Temp3 != "fail") || (Humi3 != "fail")) {
+            Firebase.setString("Alert", "30");
+            Serial.println("Sink 1 lost connection & Sensor Node 3 Good");
+          }
+        }
+        Firebase.setFloat("Count", Count);
+        delay(50);
+        Count++;
         digitalWrite(LED_BUILTIN, HIGH);
+        interrupt = true;
         b = 0;
       }
       else if ((a == 1) && (b == 0)) {
-        Firebase.setString("Alert", "10");
-        Serial.println("Sink 2 lost connection");
+        if (((Temp1 != "NaN") || (Humi1 != "NaN")) && ((Temp2 != "NaN") || (Humi2 != "NaN"))) {
+          if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 != "fail") || (Humi2 != "fail"))) {
+            Firebase.setString("Alert", "31");
+            Serial.println("Sink 2 lost connection & Sensor Node 1 and Sensor Node 2 Good");
+          }
+          else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 != "fail") || (Humi2 != "fail"))) {
+            Firebase.setString("Alert", "32");
+            Serial.println("Sink 2 lost connection & Sensor Node 1 Failed");
+          }
+          else if (((Temp1 != "fail") || (Humi1 != "fail")) && ((Temp2 == "fail") || (Humi2 == "fail"))) {
+            Firebase.setString("Alert", "33");
+            Serial.println("Sink 2 lost connection & Sensor Node 2 Failed");
+          }
+          else if (((Temp1 == "fail") || (Humi1 == "fail")) && ((Temp2 == "fail") || (Humi2 == "fail"))) {
+            Firebase.setString("Alert", "34");
+            Serial.println("Sink 2 lost connection & Sensor Node 1 & Sensor node 2 Failed");
+          }
+        } 
+        else if (((Temp1 == "NaN") || (Humi1 == "NaN")) && ((Temp2 != "NaN") || (Humi2 != "NaN"))) {
+          if ((Temp2 != "fail") || (Humi2 != "fail")) {
+            Firebase.setString("Alert", "35");
+            Serial.println("Sink 2 lost connection & Node 1 Abort & Sensor Node 2 Good");
+          }
+          else if ((Temp2 == "fail") || (Humi2 == "fail")) {
+            Firebase.setString("Alert", "36");
+            Serial.println("Sink 2 lost connection & Node 1 Abort & Sensor Node 2 Failed");
+          }
+        }
+        else if (((Temp1 != "NaN") || (Humi1 != "NaN")) && ((Temp2 == "NaN") || (Humi2 == "NaN"))) {
+          if ((Temp1 != "fail") || (Humi1 != "fail")) {
+            Firebase.setString("Alert", "37");
+            Serial.println("Sink 2 lost connection & Node 2 Abort & Sensor Node 1 Good");
+          }
+          else if ((Temp1 == "fail") || (Humi1 == "fail")) {
+            Firebase.setString("Alert", "38");
+            Serial.println("Sink 2 lost connection & Node 2 Abort & Sensor Node 1 Failed");
+          }
+        }
+        else if (((Temp1 == "NaN") || (Humi1 == "NaN")) && ((Temp2 == "NaN") || (Humi2 == "NaN"))) {
+          Firebase.setString("Alert", "39");
+          Serial.println("Sink 2 lost connection & Node 1 and Node 2 Abort");
+        }
+        delay(50);
+        Firebase.setFloat("Count", Count);
+        delay(50);
+        Count++;
         digitalWrite(LED_BUILTIN, HIGH);
+        interrupt = true;
         a = 0;
       }
     }

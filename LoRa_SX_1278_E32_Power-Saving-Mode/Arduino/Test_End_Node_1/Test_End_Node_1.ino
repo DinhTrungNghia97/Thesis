@@ -35,8 +35,11 @@ void loop() {
   if(mySerial.available() > 0){//Read from UM402 and send to serial monitor
     String input = mySerial.readString();
     Serial.println(input);
-    float h = dht.readHumidity();
-    float t = dht.readTemperature();  
+    float h = (float)random(5000,6000)/100;
+    float t = dht.readTemperature();
+    if (isnan(t)) {
+      String h = "NaN";  
+    }
     if (input.indexOf("Data") != -1) {
       if (isnan(h) || isnan(t)) {
         Serial.println("Failed to read from DHT sensor!");
@@ -53,6 +56,7 @@ void loop() {
         mySerial.write(0x25);
         mySerial.write(0x18);
         mySerial.println("Data0," + String(t) + "," + String(h));
+        Serial.println(String(t) + " " + String(h));
         while(digitalRead(AUX) == 0) {}
         gotosleep = true;
       }
