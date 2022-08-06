@@ -20,6 +20,6 @@ void senddata()
   mySerial.write(0x01);
   mySerial.write(0x25);
   mySerial.write(0x19);
-  mySerial.write("Anh nho em\n");
-  mySerial.write("What the fuck\n");
+  mySerial.write("I miss you\n");
+  mySerial.write("I don't love you\n");
 }
