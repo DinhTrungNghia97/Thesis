@@ -1,17 +1,17 @@
-// Chương trình đọc nhiệt độ, độ ẩm từ cảm biến DHT
-// Written by ladyada, public domain
-// Chỉnh  sửa cho TIVA C bởi hocARM.org
+// Program to reading data (temperature and moisture) from DHT sensor
+// Written by Trung Nghia Dinh
+// Applying for Tiva™ C Series Microcontrollers
 
 #include "DHT.h"
 
-#define DHTPIN PD_0     // Chân DATA nối với PD0
+#define DHTPIN PD_0     // The DATA pin pairs with PD0
 
-// Uncomment loại cảm biến bạn sử dụng, nếu DHT11 thì uncomment DHT11 và comment DHT22
+// Uncomment the sensor that you are using, if it is DHT11 then uncomment DHT11 and comment DHT22
 //#define DHTTYPE DHT11   // DHT 11
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
-// Kết nối
+// Table of pairing wires
 // DHT       | TIVA C
 //----------------
 // VCC(1)    |  3.3V
@@ -19,49 +19,49 @@
 // NC(3)     |  x
 // GND(4)    |  GND
 
-// Kết nối chân 1 của DHT với 3.3V
-// Chân 2 kết nối với bất kỳ chân nào của TIVA C
-// Chân 4 nối với GND
-// Nối trở 10k giữa chân 1 và chân 2
+// Connects pin 1 of DHT to 3.3V
+// Pin 2 connects to any pin of TIVA C
+// Pin 4 connects to GND
+// A resistance of 10k between pin 1 và pin 2
 
-// Khởi tạo cảm biến
+// Initiates the sensor
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  // Khởi tạo cổng serial baud 115200
+  // Initiate serial baud 115200
   Serial.begin(115200);
   Serial.println("DHTxx test!");
   Serial1.begin(115200);
-  // Bắt đầu đọc dữ liệu
+  // Starting to read sensor
   dht.begin();
 }
 
 void loop() {
-  // Đợi chuyển đổi dữ liệu khoảng 2s
+  // Waiting to transfer data in 2s
   delay(2000);
 
   float h = dht.readHumidity();
-  // Đọc giá trị nhiệt độ C (mặc định)
+  // Read from sensor the temperature value in C degree (by default)
   float t = dht.readTemperature();
-  // Đọc giá trị nhiệt độ F(isFahrenheit = true)
+  // Read from sensor the temperature value in F (isFahrenheit = true)
   float f = dht.readTemperature(true);
 
-  // Kiểm tra quá trình đọc thành công hay không
+  // Checks if the data is read successfully or not
   if (isnan(h) || isnan(t) || isnan(f)) {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
 
-  // Tính chỉ số nhiệt độ F (mặc định)
+  // Calculate the Farenheit index F (by default)
   //  float hif = dht.computeHeatIndex(f, h);
-  // Tính chỉ số nhiệt độ C (isFahreheit = false)
+  // Calculate the Celcius index (isFahreheit = false)
   //  float hic = dht.computeHeatIndex(t, h, false);
 
-  // IN thông tin ra màn hình
-  Serial.print("Do am: ");
+  // Print the data to the screen
+  Serial.print("Moisture: ");
   Serial.print(h);
   Serial.print(" %\t");
-  Serial.print("Nhiet do: ");
+  Serial.print("Temperature: ");
   Serial.print(t);
   Serial.println(" *C ");
   //  Serial.print(f);
